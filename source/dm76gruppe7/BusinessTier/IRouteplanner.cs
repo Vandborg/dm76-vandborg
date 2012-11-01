@@ -6,8 +6,9 @@ using DataTier;
 
 namespace BusinessTier
 {
-    interface IRouteplanner
+    public interface IRouteplanner
     {
-        Route createRoute(DateTime startDate, Node startAddress, Node endAddress);
+        Graph getGraph();
+        //Route createRoute(DateTime startDate, Node<Station> startAddress, Node<Station> endAddress);
     }
 }

@@ -43,9 +43,9 @@
     <Compile Include="Dijkstra.cs" />
     <Compile Include="IRouteplanner.cs" />
     <Compile Include="IRouteRetriever.cs" />
-    <Compile Include="RoutePlanner.cs" />
     <Compile Include="RouteRetriever.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoutePlanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTier\DataTier.csproj">

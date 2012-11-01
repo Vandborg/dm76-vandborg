@@ -7,7 +7,7 @@ namespace DataTier
 {
     public class Edge
     {
-        public int _id { get; private set; }
+        /*public int _id { get; private set; }
         public int _distance { get; private set; }
         public Node _startNode { get; private set; }
         public Node _endNode { get; private set; }
@@ -34,6 +34,6 @@ namespace DataTier
             _distance = distance;
             _startNode = startNode;
             _endNode = endNode;
-        }
+        }*/
     }
 }

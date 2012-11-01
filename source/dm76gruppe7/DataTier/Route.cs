@@ -7,7 +7,7 @@ namespace DataTier
 {
     public class Route
     {
-        int _id;
+       /* int _id;
         DateTime _startDate;
         DateTime _endDate;
         Node _startAddress;
@@ -94,6 +94,6 @@ namespace DataTier
         public void RemovePartRoute(PartRoute partRoute)
         {
             _partRoutes.Remove(partRoute);
-        }
+        }*/
     }
 }

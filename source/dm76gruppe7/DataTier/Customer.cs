@@ -7,7 +7,7 @@ namespace DataTier
 {
     public class Customer
     {
-        public int _id { get; set; }
+        /*public int _id { get; set; }
         public string _name { get; set; }
         public string _email { get; set; }
 
@@ -83,6 +83,6 @@ namespace DataTier
         public void RemoveCar(Car car)
         {
             _cars.Remove(car);
-        }
+        }*/
     }
 }

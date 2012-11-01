@@ -5,28 +5,34 @@ using System.Text;
 
 namespace DataTier
 {
-    public class Station
+    public class Station : Location
     {
         public int _id { get; set; }
-        public Node _address { get; set; }
+        
         List<Battery> _batteries = new List<Battery>();
 
         public Station()
         {
             _id = -1;
-            _address = null;
+            _street = null;
+            _streetNo = null;
+            _zipCode = -1;
         }
 
-        public Station(Node address)
+        public Station(string street, string streetNo, int zipCode)
         {
             _id = -1;
-            _address = address;
+            _street = street;
+            _streetNo = streetNo;
+            _zipCode = zipCode;
         }
 
-        public Station(int id, Node address)
+        public Station(int id, string street, string streetNo, int zipCode)
         {
             _id = id;
-            _address = address;
+            _street = street;
+            _streetNo = streetNo;
+            _zipCode = zipCode;
         }
 
         public void AddBattery(Battery battery)

@@ -6,9 +6,9 @@ using DataTier;
 
 namespace BusinessTier
 {
-    public class RouteRetriever : IRouteRetriever
+    public class RouteRetriever//: IRouteRetriever
     {
-        List<Route> _routes = new List<Route>();
+        /*List<Route> _routes = new List<Route>();
         
         public List<Route> AllRoutes()
         {
@@ -34,6 +34,6 @@ namespace BusinessTier
                          });
             return results;
                           
-        }
+        }*/
     }
 }
