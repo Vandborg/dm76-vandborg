@@ -27,7 +27,7 @@ namespace test
 
            foreach (Node n in result)
            {
-               Console.WriteLine(n.Value);
+               Console.WriteLine(n.Data);
            }
 
            Console.ReadLine();

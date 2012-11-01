@@ -7,53 +7,22 @@ namespace DataTier
 {
     public class Node
     {
-        private string _data; //skal blive en location
-        private List<Node> _neighbors = new List<Node>();
-        private List<int> _costs = new List<int>();
+        public string Data { get; set; }  //skal blive en location
+        public List<Node> Neighbors { get; set; }
+        public List<int> Costs { get; private set; }
+        public int Label { get; set; }
+        public Node Previous { get; set; }
+        public bool InQueue = false;
 
-        public Node() {}
-        public Node(string data) : this(data, null) {}
+        public Node() : this("") {}
+        public Node(string data) : this(data, new List<Node>()) { }
         public Node(string data, List<Node> neighbors)
         {
-            this._data = data;
-            this._neighbors = neighbors;
-        }
-
-        public string Value
-        {
-            get
-            {
-                return _data;
-            }
-            set
-            {
-                _data = value;
-            }
-        }
-
-        public List<Node> Neighbors
-        {
-            get
-            {
-                return _neighbors;
-            }
-            set
-            {
-                _neighbors = value;
-            }
-        }
-
-        public List<int> Costs
-        {
-            get
-            {
-                if (_costs == null)
-                {
-                    _costs = new List<int>();
-                }
-
-                return _costs;
-            }
+            this.Data = data;
+            this.Neighbors = neighbors;
+            this.Costs = new List<int>();
+            this.Label = 0;
+            this.Previous = null;
         }
     }
 }

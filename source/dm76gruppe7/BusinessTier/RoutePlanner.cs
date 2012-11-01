@@ -19,12 +19,12 @@ namespace BusinessTier
             Node node4 = new Node();
             Node node5 = new Node();
             Node node6 = new Node();
-            node1.Value = "node1";
-            node2.Value = "node2";
-            node3.Value = "node3";
-            node4.Value = "node4";
-            node5.Value = "node5";
-            node6.Value = "node6";
+            node1.Data = "node1";
+            node2.Data = "node2";
+            node3.Data = "node3";
+            node4.Data = "node4";
+            node5.Data = "node5";
+            node6.Data = "node6";
             _web.AddNode(node1);
             _web.AddNode(node2);
             _web.AddNode(node3);

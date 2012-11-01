@@ -82,223 +82,67 @@ namespace DataTier
 
         public List<Node> ShortestPath(Node startNode, Node endNode)
         {
-            List<int> distance = new List<int>();
-            List<int> altDistance = new List<int>();
-            List<Node> previous = new List<Node>();
             List<Node> queue = _nodeSet;
             Node nextNode = null;
             List<Node> shortestRoute = new List<Node>();
-
-            foreach (Node i in queue)
-            {
-                distance.Add(int.MaxValue);
-                previous.Add(null);
+            foreach(var x in queue){
+                Debug.Write(x.Data + " => ");
+                foreach (var y in x.Neighbors)
+                    Debug.Print(y.Data + " (" + x.Costs[x.Neighbors.IndexOf(y)] + ")");
+                x.Label = int.MaxValue;
+                x.InQueue = true;
             }
 
-            distance[queue.IndexOf(startNode)] = 0;
-            
-            #region Init start
-            Debug.WriteLine("------------------Init start------------------");
-            Debug.WriteLine("Node: "+queue.ElementAt(queue.IndexOf(startNode)).Value);
-            Debug.WriteLine("Distance: " + distance[queue.IndexOf(startNode)]);
-            Debug.WriteLine("Index: " + queue.IndexOf(startNode));
-            Debug.WriteLine("-------------------Init end...----------------");
-            #endregion
-
-            //previous[queue.IndexOf(startNode)] = -1;
+            startNode.Label = 0;
 
             while (queue.Count > 0)
             {
                 int smallestDistance = int.MaxValue;
-                #region Smallest distance start
-                Debug.WriteLine("------------------Smallest distance start------------------");
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
-                {
-                    file.WriteLine("------------------Smallest distance start------------------");
-                    file.WriteLine("SmallestDistance before loop: " + smallestDistance.ToString());
-                } 
-                Debug.WriteLine("SmallestDistance before loop: " + smallestDistance.ToString());
-                #endregion
-                #region commented out
-                /*for (int i = 0; i < queue.Count; i++)
-                {
-                    if (distance[i] <= smallestDistance && distance[i] != 0 )
-                    {
-                        smallestDistance = distance[i];
-                        nextNode = i;
-                    }
-                    else if (distance[i] == 0)
-                    {
-                        nextNode = queue.IndexOf(startNode);
-                    }
-                }*/
-                #endregion
 
-                foreach (Node j in queue)
+                foreach (Node j in queue) // only the previous nodes have a label
                 {
-                    #region output
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
+                    if (j.Label < smallestDistance)
                     {
-                        file.WriteLine("foreach: " + j.Value);
-                    }
-                    Debug.WriteLine("Node j:" + j.Value);
-                    #endregion
-                    if (distance[queue.IndexOf(j)] <= smallestDistance)
-                    {
-                        smallestDistance = distance[queue.IndexOf(j)];
-                        #region output
-                        Debug.WriteLine("SmallestDistance after loop: " + smallestDistance.ToString());
-                        #endregion
+                        smallestDistance = j.Label;
                         nextNode = j;
-                        #region output
-                        Debug.WriteLine("nextNode: " + nextNode.Value);
-                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
-                        {
-                            file.WriteLine("Distance[" + queue.IndexOf(j) + "]: " + distance[queue.IndexOf(j)]);
-                            file.WriteLine("SmallestDistance after loop: " + smallestDistance.ToString());
-                            file.WriteLine("nextNode: " + nextNode.Value);
-                        }
-                        #endregion
                     }
                 }
 
-                altDistance.Add(distance[queue.IndexOf(nextNode)]);
-
-                #region output
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
-                {
-                    file.WriteLine("Before remove");
-                }
-
-                foreach (int i in distance)
-                {
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
-                    {
-                        file.WriteLine("i: " + i.ToString());
-                    }
-                }
-                #endregion
-
-                if (distance[queue.IndexOf(nextNode)] == int.MaxValue)
+                if (smallestDistance == int.MaxValue)
                 {
                     break;
                 }
 
-
-                distance.RemoveAt(queue.IndexOf(nextNode));
                 queue.Remove(nextNode);
+                nextNode.InQueue = false; // optimization
 
                 if (nextNode == endNode)
                 {
-                    for (int i = 0; i < previous.Count;i++ )
+                    var tmp = nextNode;
+                    shortestRoute.Add(nextNode);
+                    while (tmp.Previous != null)
                     {
-                        if (previous[i] != null)
-                        {
-                            shortestRoute.Add(previous[i]);
-                        }
+                        shortestRoute.Add(tmp.Previous);
+                        tmp = tmp.Previous;
                     }
+                    shortestRoute.Reverse();
                     break;
                 }
 
-                
-                #region output
-                Debug.WriteLine("------------------Smallest distance end--------------------");
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
+                for(int i = 0; i < nextNode.Neighbors.Count; i++)
                 {
-                    file.WriteLine("------------------Smallest distance end--------------------" + nextNode.Value);
-                    file.WriteLine("-------------------Removing stuff start--------------------");
-                }
-                #endregion
-
-
-
-                #region output
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
-                {
-                    file.WriteLine("After remove");
-                }
-                foreach (int i in distance)
-                {
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
+                    var Neighbour = nextNode.Neighbors[i];
+                    if (Neighbour.InQueue)
                     {
-                        file.WriteLine("i: " + i.ToString());
-                    }
-                }
-                #endregion
-                
-
-                #region output
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
-                {
-                    file.WriteLine("-------------------Removing stuff end----------------------");
-                }
-                #endregion
-
-                #region commented out
-                /*if (nextNode == queue.IndexOf(endNode))
-                {
-                    for (int i = 0; i < previous.Count; i++)
-                    {
-                        if (previous[i] != -1)
+                        int distance = nextNode.Label + nextNode.Costs[i];
+                        if (distance < Neighbour.Label)
                         {
-                            shortestRoute.Add(_nodeSet.ElementAt(previous[i]));
-                            break;
-                        }
-                    }
-                }*/
-                #endregion
-
-                foreach (Node neighbor in nextNode.Neighbors)
-                {
-                    if(queue.Contains(neighbor))
-                    {
-                        int alt = altDistance.Last() + nextNode.Costs[nextNode.Neighbors.IndexOf(neighbor)];
-                        int v = queue.IndexOf(neighbor);
-                        if(alt < distance[v])
-                        {
-                            #region output
-                            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"E:\Windows\Documents\DM76-gruppe7\Log.txt", true))
-                            {
-                                file.WriteLine("-------------------Neighborloop start----------------------");
-                                file.WriteLine("nextNode: " + nextNode.Value);
-                                file.WriteLine("neighbor: " + neighbor.Value);
-                                file.WriteLine("alt: " + alt.ToString());
-                                file.WriteLine("distance: " + distance[v].ToString());
-                                file.WriteLine("-------------------Neighborloop end------------------------");
-                            }
-                            #endregion
-                            distance[v] = alt;
-                            previous.Add(nextNode);
+                            Neighbour.Label = distance;
+                            Neighbour.Previous = nextNode;
                         }
                     }
                 }
-                #region commented out
-                /*if (nextNode > 0)
-                {
-                    for (int v = 0; v < queue.ElementAt(nextNode).Neighbors.Count; v++)
-                    {
-                        Node Neighbor = queue.ElementAt(nextNode).Neighbors.ElementAt(v);
-
-                        /*for (int i = 0; i < queue.Count; i++)
-                        {
-                        }*/
-
-                /* int alt = distance[nextNode] + queue.ElementAt(nextNode).Costs[v];
-
-                 if (queue.Contains(Neighbor))
-                 {
-                     if (alt < distance[queue.IndexOf(Neighbor)])
-                     {
-                         distance[queue.IndexOf(Neighbor)] = alt;
-                         previous[queue.IndexOf(Neighbor)] = nextNode;
-                     }
-                 }
-             }
-         }
-         queue.RemoveAt(nextNode);*/
-                #endregion
             }
-            
             return shortestRoute;
         }
 
