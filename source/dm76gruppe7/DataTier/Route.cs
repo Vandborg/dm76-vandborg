@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace DataTier
 {
+    [KnownType(typeof(Node))]
+    [KnownType(typeof(Customer))]
+    [KnownType(typeof(PartRoute))]
+    [DataContract(IsReference = true)]
     public class Route
     {
-       /* int _id;
-        DateTime _startDate;
-        DateTime _endDate;
-        Node _startAddress;
-        Node _endAddress;
-        Customer _customer;
+        [DataMember]
+        public int _id { get; private set; }
+        [DataMember]
+        public DateTime _startDate { get; set; }
+        [DataMember]
+        public DateTime _endDate { get; set; }
+        [DataMember]
+        public Node _startAddress { get; set; }
+        [DataMember]
+        public Node _endAddress { get; set; }
+        [DataMember]
+        public Customer _customer { get; set; }
+
         List<PartRoute> _partRoutes = new List<PartRoute>();
 
         public Route()
@@ -45,42 +57,7 @@ namespace DataTier
             _customer = customer;
         }
 
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
-        public DateTime StartDate
-        {
-            get { return _startDate; }
-            set { _startDate = value; }
-        }
-
-        public DateTime EndDate
-        {
-            get { return _endDate; }
-            set { _endDate = value; }
-        }
-
-        public Node StartAddress
-        {
-            get { return _startAddress; }
-            set { _startAddress = value; }
-        }
-
-        public Node EndAddress
-        {
-            get { return _endAddress; }
-            set { _endAddress = value; }
-        }
-
-        public Customer Customer
-        {
-            get { return _customer; }
-            private set { _customer = value; }
-        }
-
+        [DataMember]
         public List<PartRoute> PartRoute
         {
             get { return _partRoutes; }
@@ -94,6 +71,6 @@ namespace DataTier
         public void RemovePartRoute(PartRoute partRoute)
         {
             _partRoutes.Remove(partRoute);
-        }*/
+        }
     }
 }

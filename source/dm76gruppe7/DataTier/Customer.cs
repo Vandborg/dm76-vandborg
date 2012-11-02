@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace DataTier
 {
+    [KnownType(typeof(Route))]
+    [KnownType(typeof(Car))]
+    [DataContract(IsReference = true)]
     public class Customer
     {
-        /*public int _id { get; set; }
+        [DataMember]
+        public int _id { get; set; }
+        [DataMember]
         public string _name { get; set; }
+        [DataMember]
         public string _email { get; set; }
 
         List<Route> _routes = new List<Route>();
@@ -35,11 +42,13 @@ namespace DataTier
             _email = email;
         }
 
+        [DataMember]
         public List<Route> Routes
         {
             get { return _routes; }
         }
 
+        [DataMember]
         public List<Car> Cars
         {
             get { return _cars; }
@@ -55,7 +64,7 @@ namespace DataTier
             Route result = _routes.Find(
                         delegate(Route route)
                         {
-                            return route.Id == id;
+                            return route._id == id;
                         });
             _routes.Remove(result);
         }
@@ -83,6 +92,6 @@ namespace DataTier
         public void RemoveCar(Car car)
         {
             _cars.Remove(car);
-        }*/
+        }
     }
 }

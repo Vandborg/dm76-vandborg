@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace DataTier
 {
+    [DataContract(IsReference = true)]
     public abstract class Location
     {
+        [DataMember]
+        public int _id { get; private set; }
+        [DataMember]
         public string _street { get; set; }
+        [DataMember]
         public string _streetNo { get; set; }
+        [DataMember]
         public int _zipCode { get; set; }
 
         public Location()
         {
+            _id = -1;
             _street = null;
             _streetNo = null;
             _zipCode = -1;
@@ -20,6 +28,7 @@ namespace DataTier
 
         public Location(string street, string streetNo, int zipCode)
         {
+            _id = -1;
             _street = street;
             _streetNo = streetNo;
             _zipCode = zipCode;
@@ -27,6 +36,7 @@ namespace DataTier
 
         public Location(int id, string street, string streetNo, int zipCode)
         {
+            _id = id;
             _street = street;
             _streetNo = streetNo;
             _zipCode = zipCode;

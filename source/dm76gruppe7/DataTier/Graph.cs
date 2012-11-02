@@ -4,9 +4,11 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 
 namespace DataTier
 {
+    [KnownType(typeof(Node))]
     public class Graph
     {
         private List<Node> _nodeSet;
@@ -30,11 +32,6 @@ namespace DataTier
             _nodeSet.Add(node);
         }
 
-        /*public void AddNode(T value)
-        {
-            _nodeSet.Add(new GraphNode<T>(value));
-        }*/
-
         public void AddDirectedEdge(Node from, Node to, int cost)
         {
             from.Neighbors.Add(to);
@@ -50,16 +47,8 @@ namespace DataTier
             to.Costs.Add(cost);
         }
 
-        /*public bool Contains(Node value)
-        {
-            //return _nodeSet.FindByValue(value) != null;
-            return _nodeSet.Contains(value);
-        }*/
-
         public bool Remove(Node nodeToRemove)
         {
-           /* Node nodeToRemove = _nodeSet.Find(value);
-            Node nodeToRemove = _nodeSet.Find(*/
             if (nodeToRemove == null)
             {
                 return false;
@@ -146,6 +135,7 @@ namespace DataTier
             return shortestRoute;
         }
 
+        [DataMember]
         public List<Node> Nodes
         {
             get
@@ -154,6 +144,7 @@ namespace DataTier
             }
         }
 
+        [DataMember]
         public int Count
         {
             get

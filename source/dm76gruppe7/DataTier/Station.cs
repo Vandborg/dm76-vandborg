@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace DataTier
 {
+    [KnownType(typeof(Battery))]
+    [DataContract(IsReference = true)]
     public class Station : Location
     {
+        [DataMember]
         public int _id { get; set; }
         
         List<Battery> _batteries = new List<Battery>();
@@ -33,6 +37,12 @@ namespace DataTier
             _street = street;
             _streetNo = streetNo;
             _zipCode = zipCode;
+        }
+
+        [DataMember]
+        public List<Battery> Batteries
+        {
+            get { return _batteries; }
         }
 
         public void AddBattery(Battery battery)

@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dijkstra.cs" />
     <Compile Include="IRouteplanner.cs" />
     <Compile Include="IRouteRetriever.cs" />
     <Compile Include="RouteRetriever.cs" />

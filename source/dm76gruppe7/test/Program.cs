@@ -14,22 +14,12 @@ namespace test
         {
            Graph graph = rp.getGraph();
 
-            /*foreach(Node gn in graph.Nodes)
-            {
-                foreach (int i in gn.Costs)
-                {
-                    Console.Write(i.ToString() + " ");
-                }
-            }
-            Console.ReadLine();*/
-
-           List<Node> result =  graph.ShortestPath(graph.Nodes.ElementAt(0), graph.Nodes.ElementAt(5));
+           List<Node> result =  graph.ShortestPath(graph.Nodes.ElementAt(1), graph.Nodes.ElementAt(5));
 
            foreach (Node n in result)
            {
-               Console.WriteLine(n.Data);
+               Console.WriteLine(n.Data._street+" "+n.Data._streetNo);
            }
-
            Console.ReadLine();
         }
     }

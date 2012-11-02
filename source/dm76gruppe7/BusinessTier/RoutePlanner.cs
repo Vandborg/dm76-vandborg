@@ -13,18 +13,18 @@ namespace BusinessTier
         public RoutePlanner()
         {
             _web = new Graph();
-            Node node1 = new Node();
-            Node node2 = new Node();
-            Node node3 = new Node();
-            Node node4 = new Node();
-            Node node5 = new Node();
-            Node node6 = new Node();
-            node1.Data = "node1";
+            Node node1 = new Node(new Station("Løkkegade","21, 3. th.",9000));
+            Node node2 = new Node(new Station("Løkkegade", "22, 3. th.", 9000));
+            Node node3 = new Node(new Station("Løkkegade", "23, 3. th.", 9000));
+            Node node4 = new Node(new Station("Løkkegade", "24, 3. th.", 9000));
+            Node node5 = new Node(new Station("Løkkegade", "25, 3. th.", 9000));
+            Node node6 = new Node(new Station("Løkkegade", "26, 3. th.", 9000));
+            /*node1.Data = "node1";
             node2.Data = "node2";
             node3.Data = "node3";
             node4.Data = "node4";
             node5.Data = "node5";
-            node6.Data = "node6";
+            node6.Data = "node6";*/
             _web.AddNode(node1);
             _web.AddNode(node2);
             _web.AddNode(node3);
