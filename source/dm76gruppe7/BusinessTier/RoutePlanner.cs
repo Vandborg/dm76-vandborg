@@ -28,19 +28,19 @@ namespace BusinessTier
             _web.AddNode(node1);
             _web.AddNode(node2);
             _web.AddNode(node3);
-            _web.AddNode(node4);
+            /*_web.AddNode(node4);
             _web.AddNode(node5);
-            _web.AddNode(node6);
+            _web.AddNode(node6);*/
 
             _web.AddUndirectedEdge(node2,node1,10);
-            _web.AddUndirectedEdge(node1, node4, 15);
+            //_web.AddUndirectedEdge(node1, node4, 15);
             _web.AddUndirectedEdge(node1, node3, 5);
             _web.AddUndirectedEdge(node3, node2, 20);
-            _web.AddUndirectedEdge(node3, node6, 25);
-            _web.AddUndirectedEdge(node4, node3, 10);
-            _web.AddUndirectedEdge(node4, node6, 5);
-            _web.AddUndirectedEdge(node4, node5, 20);
-            _web.AddUndirectedEdge(node5, node2, 15);
+            //_web.AddUndirectedEdge(node3, node6, 25);
+            //_web.AddUndirectedEdge(node4, node3, 10);
+            //_web.AddUndirectedEdge(node4, node6, 5);
+            //_web.AddUndirectedEdge(node4, node5, 20);
+            //_web.AddUndirectedEdge(node5, node2, 15);
 
         }
 

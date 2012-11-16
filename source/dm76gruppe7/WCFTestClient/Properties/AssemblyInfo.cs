@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WCFBetterplace")]
+[assembly: AssemblyTitle("WCFTestClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WCFBetterplace")]
+[assembly: AssemblyProduct("WCFTestClient")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("17715112-c0cb-46ca-a83f-97629fa62f1a")]
+[assembly: Guid("9b81a0ec-ce03-48c3-9abb-aa34de787b90")]
 
 // Version information for an assembly consists of the following four values:
 //

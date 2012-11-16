@@ -4,16 +4,15 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using DataTier;
 using BusinessTier;
+using DataTier;
 
 namespace WCFBetterplace
 {
     public class RemoteRoutePlanner : IRemoteRoutePlanner
     {
-        static RoutePlanner rp = new RoutePlanner();
-
-        public Graph getGraph()
+        static IRouteplanner rp = new RoutePlanner();
+        public DataTier.Graph getGraph()
         {
             return rp.getGraph();
         }

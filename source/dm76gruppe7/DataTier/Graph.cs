@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 namespace DataTier
 {
     [KnownType(typeof(Node))]
+    [DataContract(IsReference = true)]
     public class Graph
     {
         private List<Node> _nodeSet;
@@ -144,13 +145,13 @@ namespace DataTier
             }
         }
 
-        [DataMember]
+        /*[DataMember]
         public int Count
         {
             get
             {
                 return _nodeSet.Count;
             }
-        }
+        }*/
     }
 }
