@@ -12,7 +12,7 @@ namespace WCFTestClient
         //static IRouteplanner rp = new RoutePlanner();
         static void Main(string[] args)
         {
-            /*RemoteBetterplaceReference.RemoteRouteplannerClient rp = new RemoteBetterplaceReference.RemoteRouteplannerClient();
+            RemoteBetterplaceReference.RemoteRoutePlannerClient rp = new RemoteBetterplaceReference.RemoteRoutePlannerClient();
             Graph graph = rp.getGraph();
 
             List<Node> result = graph.ShortestPath(graph.Nodes.ElementAt(1), graph.Nodes.ElementAt(5));
@@ -21,7 +21,7 @@ namespace WCFTestClient
             {
                 Console.WriteLine(n.Data._street + " " + n.Data._streetNo);
             }
-            Console.ReadLine();*/
+            Console.ReadLine();
         }
     }
 }

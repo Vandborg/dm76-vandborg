@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DataTier" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataTier" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Graph">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Nodes" nillable="true" type="tns:ArrayOfNode" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Graph" nillable="true" type="tns:Graph" />
+  <xs:complexType name="ArrayOfNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Node" nillable="true" type="tns:Node" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNode" nillable="true" type="tns:ArrayOfNode" />
+  <xs:complexType name="Node">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Data" nillable="true" type="tns:Location" />
+      <xs:element minOccurs="0" name="InQueue" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Label" type="xs:int" />
+      <xs:element minOccurs="0" name="Neighbors" nillable="true" type="tns:ArrayOfNode" />
+      <xs:element minOccurs="0" name="Previous" nillable="true" type="tns:Node" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Node" nillable="true" type="tns:Node" />
+  <xs:complexType name="Location">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_id" type="xs:int" />
+      <xs:element minOccurs="0" name="_street" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_streetNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_zipCode" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Location" nillable="true" type="tns:Location" />
+</xs:schema>

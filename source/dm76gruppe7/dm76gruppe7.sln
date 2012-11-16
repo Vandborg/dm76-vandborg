@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{1ED0034E-2368-4988-B336-B8A5B90D5DAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFTestClient", "WCFTestClient\WCFTestClient.csproj", "{9972A03D-E5DC-42D3-B45E-00E1354E6EE5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FE73AEF-C0F0-4133-86C4-D4BD900F656B} = {7FE73AEF-C0F0-4133-86C4-D4BD900F656B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFBetterplace", "WCFBetterplace\WCFBetterplace.csproj", "{7FE73AEF-C0F0-4133-86C4-D4BD900F656B}"
 EndProject

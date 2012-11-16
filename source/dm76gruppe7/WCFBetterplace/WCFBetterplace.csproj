@@ -48,7 +48,10 @@
     <Compile Include="RemoteRoutePlanner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\DataTier.Graph.datasource" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessTier\BusinessTier.csproj">
@@ -59,6 +62,9 @@
       <Project>{DA3E468C-A62E-4868-9C77-AC821DB1F932}</Project>
       <Name>DataTier</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
