@@ -13,6 +13,7 @@ namespace WCFTestClient
         static void Main(string[] args)
         {
             RemoteBetterplaceReference.RemoteRoutePlannerClient rp = new RemoteBetterplaceReference.RemoteRoutePlannerClient();
+            
             Graph graph = rp.getGraph();
 
             List<Node> result = graph.ShortestPath(graph.Nodes.ElementAt(1), graph.Nodes.ElementAt(5));

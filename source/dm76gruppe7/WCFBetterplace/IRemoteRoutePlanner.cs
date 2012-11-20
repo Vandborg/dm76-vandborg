@@ -13,5 +13,11 @@ namespace WCFBetterplace
     {
         [OperationContract]
         Graph getGraph();
+
+        [OperationContract]
+        List<string> test();
+
+        [OperationContract]
+        List<Node> shortestRoute(Node startNode, Node endNode);
     }
 }

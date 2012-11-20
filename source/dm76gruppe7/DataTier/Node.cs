@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 namespace DataTier
 {
     [KnownType(typeof(Location))]
+    [DataContract(IsReference = true)]
     public class Node
     {
         [DataMember]
