@@ -61,6 +61,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\DataTier.Graph.datasource" />
+    <None Include="Properties\DataSources\DataTier.Node.datasource" />
+    <None Include="Service References\RemoteBetterplaceReference\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\RemoteBetterplaceReference\DataTier.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -10,6 +10,7 @@ namespace DataTier
     [KnownType(typeof(Station))]
     [KnownType(typeof(Car))]
     [DataContract(IsReference= true)]
+    [Serializable]
     public class Battery
     {
         [DataMember]

@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 namespace DataTier
 {
     [DataContract(IsReference = true)]
+    [Serializable]
     public abstract class Location
     {
         [DataMember]

@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DataTier
 {
     [KnownType(typeof(Node))]
     [DataContract(IsReference = true)]
+    [Serializable]
     public class Graph
     {
         private List<Node> _nodeSet;
@@ -73,16 +76,64 @@ namespace DataTier
         public List<Node> ShortestPath(Node startNode, Node endNode)
         {
             List<Node> queue = _nodeSet;
+            //List<Node> queue = new List<Node>();
+            
+            /*foreach (Node n in _nodeSet)
+            {
+                if (n == startNode)
+                { 
+                    startNode = startNode.DeepClone();
+                    queue.Add(startNode);
+                    //startNode = new Node(startNode.Id, startNode.Data, startNode.Neighbors, startNode.Costs);
+                    //queue.Add(startNode);
+                }
+                else if (n == endNode)
+                {
+                   // endNode = new Node(endNode.Id, endNode.Data, endNode.Neighbors, endNode.Costs);
+                    //queue.Add(endNode);
+                    endNode = endNode.DeepClone();
+                    queue.Add(endNode);
+                }
+                else
+                {
+                    //queue.Add(new Node(n.Id, n.Data, n.Neighbors, n.Costs));
+                    queue.Add(n.DeepClone());
+                }
+            }*/
+
+            /*foreach (Node test in queue)
+            {
+                Console.WriteLine(test.Data._street + " " + test.Data._streetNo);
+            }*/
+
             Node nextNode = null;
             List<Node> shortestRoute = new List<Node>();
-            foreach(var x in queue){
-                Debug.Write(x.Data + " => ");
+
+           /* if (!_nodeSet.Contains(startNode))
+            {
+                Console.WriteLine("running");
+                queue.Add(startNode);
+                startNode.Neighbors.Add(queue.ElementAt(0));
+                startNode.Costs.Add(10);
+                //this.AddUndirectedEdge(startNode, queue.ElementAt(0),10);
+            }
+
+            if (!_nodeSet.Contains(endNode))
+            {
+                queue.Add(endNode);
+                endNode.Neighbors.Add(queue.ElementAt(2));
+                endNode.Costs.Add(5);
+                //this.AddUndirectedEdge(endNode, queue.ElementAt(2), 10);
+            }*/
+
+            
+            foreach(Node x in queue){
+                Debug.Write(x.Data._streetNo + " => ");
                 foreach (var y in x.Neighbors)
-                    Debug.Print(y.Data + " (" + x.Costs[x.Neighbors.IndexOf(y)] + ")");
+                    Debug.Print(y.Data._streetNo + " (" + x.Costs[x.Neighbors.IndexOf(y)] + ")");
                 x.Label = int.MaxValue;
                 x.InQueue = true;
             }
-
             startNode.Label = 0;
 
             while (queue.Count > 0)
@@ -133,6 +184,7 @@ namespace DataTier
                     }
                 }
             }
+            Console.WriteLine("Teest");
             return shortestRoute;
         }
 
@@ -142,6 +194,18 @@ namespace DataTier
             get
             {
                 return _nodeSet;
+            }
+        }
+
+        public Graph DeepClone()
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, this);
+                ms.Position = 0;
+
+                return (Graph)formatter.Deserialize(ms);
             }
         }
 

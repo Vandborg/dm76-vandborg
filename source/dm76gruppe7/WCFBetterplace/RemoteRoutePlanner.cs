@@ -30,9 +30,21 @@ namespace WCFBetterplace
             return test;
         }
 
-        public List<Node> shortestRoute(Node startNode, Node endNode)
+        public Node[] shortestRoute(Node startNode, Node endNode)
         {
-            List<Node> test = new List<Node>();
+            List<Node> result = new List<Node>();
+            Graph graph = rp.getGraph().DeepClone();
+            graph.AddNode(startNode);
+            graph.AddNode(endNode);
+            graph.AddUndirectedEdge(startNode, graph.Nodes.ElementAt(0), 10);
+            graph.AddUndirectedEdge(endNode, graph.Nodes.ElementAt(5), 5);
+
+            result = graph.ShortestPath(startNode, endNode);
+            Node[] test = new Node[result.Count];
+            for (int i = 0; i < result.Count; i++)
+            {
+                test[i] = result[i];
+            }
             return test;
         }
     }

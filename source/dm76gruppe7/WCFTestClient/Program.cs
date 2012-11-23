@@ -14,14 +14,24 @@ namespace WCFTestClient
         {
             RemoteBetterplaceReference.RemoteRoutePlannerClient rp = new RemoteBetterplaceReference.RemoteRoutePlannerClient();
             
-            Graph graph = rp.getGraph();
+            Node testNode1 = new Node(new Station("Løkkegade","27, 3. th.",9000));
+            Node testNode2 = new Node(new Station("Løkkegade","28, 3. th.",9000));
+
+            Node[] result = rp.shortestRoute(testNode1, testNode2);
+
+            foreach (Node n in result)
+            {
+                Console.WriteLine(n.Data._street + " " + n.Data._streetNo);
+            }
+
+            /*Graph graph = rp.getGraph();
 
             List<Node> result = graph.ShortestPath(graph.Nodes.ElementAt(1), graph.Nodes.ElementAt(5));
 
             foreach (Node n in result)
             {
                 Console.WriteLine(n.Data._street + " " + n.Data._streetNo);
-            }
+            }*/
             Console.ReadLine();
         }
     }

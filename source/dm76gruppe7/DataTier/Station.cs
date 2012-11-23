@@ -8,6 +8,7 @@ namespace DataTier
 {
     [KnownType(typeof(Battery))]
     [DataContract(IsReference = true)]
+    [Serializable]
     public class Station : Location
     {
         [DataMember]

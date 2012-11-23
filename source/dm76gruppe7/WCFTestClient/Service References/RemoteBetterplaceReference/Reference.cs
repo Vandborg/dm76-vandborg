@@ -17,6 +17,13 @@ namespace WCFTestClient.RemoteBetterplaceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRemoteRoutePlanner/getGraph", ReplyAction="http://tempuri.org/IRemoteRoutePlanner/getGraphResponse")]
         DataTier.Graph getGraph();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRemoteRoutePlanner/test", ReplyAction="http://tempuri.org/IRemoteRoutePlanner/testResponse")]
+        string[] test();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRemoteRoutePlanner/shortestRoute", ReplyAction="http://tempuri.org/IRemoteRoutePlanner/shortestRouteResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DataTier.Station))]
+        DataTier.Node[] shortestRoute(DataTier.Node startNode, DataTier.Node endNode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -48,6 +55,14 @@ namespace WCFTestClient.RemoteBetterplaceReference {
         
         public DataTier.Graph getGraph() {
             return base.Channel.getGraph();
+        }
+        
+        public string[] test() {
+            return base.Channel.test();
+        }
+        
+        public DataTier.Node[] shortestRoute(DataTier.Node startNode, DataTier.Node endNode) {
+            return base.Channel.shortestRoute(startNode, endNode);
         }
     }
 }

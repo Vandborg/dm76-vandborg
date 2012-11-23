@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DataTier" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataTier" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="Graph">
     <xs:sequence>
       <xs:element minOccurs="0" name="Nodes" nillable="true" type="tns:ArrayOfNode" />
@@ -17,12 +18,16 @@
   <xs:element name="ArrayOfNode" nillable="true" type="tns:ArrayOfNode" />
   <xs:complexType name="Node">
     <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Costs" nillable="true" type="q1:ArrayOfint" />
       <xs:element minOccurs="0" name="Data" nillable="true" type="tns:Location" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="InQueue" type="xs:boolean" />
       <xs:element minOccurs="0" name="Label" type="xs:int" />
       <xs:element minOccurs="0" name="Neighbors" nillable="true" type="tns:ArrayOfNode" />
       <xs:element minOccurs="0" name="Previous" nillable="true" type="tns:Node" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Node" nillable="true" type="tns:Node" />
   <xs:complexType name="Location">
@@ -36,4 +41,99 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Location" nillable="true" type="tns:Location" />
+  <xs:complexType name="Station">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Location">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Batteries" nillable="true" type="tns:ArrayOfBattery" />
+          <xs:element minOccurs="0" name="_id" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Station" nillable="true" type="tns:Station" />
+  <xs:complexType name="ArrayOfBattery">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Battery" nillable="true" type="tns:Battery" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBattery" nillable="true" type="tns:ArrayOfBattery" />
+  <xs:complexType name="Battery">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Belongs" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="_id" type="xs:int" />
+      <xs:element minOccurs="0" name="_partRoute" nillable="true" type="tns:PartRoute" />
+      <xs:element minOccurs="0" name="_status" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Battery" nillable="true" type="tns:Battery" />
+  <xs:complexType name="PartRoute">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_battery" nillable="true" type="tns:Battery" />
+      <xs:element minOccurs="0" name="_id" type="xs:int" />
+      <xs:element minOccurs="0" name="_pickUpTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="_route" nillable="true" type="tns:Route" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="PartRoute" nillable="true" type="tns:PartRoute" />
+  <xs:complexType name="Route">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PartRoute" nillable="true" type="tns:ArrayOfPartRoute" />
+      <xs:element minOccurs="0" name="_customer" nillable="true" type="tns:Customer" />
+      <xs:element minOccurs="0" name="_endAddress" nillable="true" type="tns:Node" />
+      <xs:element minOccurs="0" name="_endDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="_id" type="xs:int" />
+      <xs:element minOccurs="0" name="_startAddress" nillable="true" type="tns:Node" />
+      <xs:element minOccurs="0" name="_startDate" type="xs:dateTime" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Route" nillable="true" type="tns:Route" />
+  <xs:complexType name="ArrayOfPartRoute">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PartRoute" nillable="true" type="tns:PartRoute" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPartRoute" nillable="true" type="tns:ArrayOfPartRoute" />
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cars" nillable="true" type="tns:ArrayOfCar" />
+      <xs:element minOccurs="0" name="Routes" nillable="true" type="tns:ArrayOfRoute" />
+      <xs:element minOccurs="0" name="_email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_id" type="xs:int" />
+      <xs:element minOccurs="0" name="_name" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="ArrayOfCar">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Car" nillable="true" type="tns:Car" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCar" nillable="true" type="tns:ArrayOfCar" />
+  <xs:complexType name="Car">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="_battery" nillable="true" type="tns:Battery" />
+      <xs:element minOccurs="0" name="_customer" nillable="true" type="tns:Customer" />
+      <xs:element minOccurs="0" name="_id" type="xs:int" />
+      <xs:element minOccurs="0" name="_licensPlate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_range" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Car" nillable="true" type="tns:Car" />
+  <xs:complexType name="ArrayOfRoute">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Route" nillable="true" type="tns:Route" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoute" nillable="true" type="tns:ArrayOfRoute" />
 </xs:schema>

@@ -18,6 +18,6 @@ namespace WCFBetterplace
         List<string> test();
 
         [OperationContract]
-        List<Node> shortestRoute(Node startNode, Node endNode);
+        Node[] shortestRoute(Node startNode, Node endNode);
     }
 }
