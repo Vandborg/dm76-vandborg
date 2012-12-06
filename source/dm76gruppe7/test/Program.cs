@@ -15,7 +15,7 @@ namespace test
         static IRouteplanner rp = new RoutePlanner();
         static void Main(string[] args)
         {
-            Node testNode1 = new Node(new Station("Løkkegade", "27, 3. th.", 9000));
+            /*Node testNode1 = new Node(new Station("Løkkegade", "27, 3. th.", 9000));
             Node testNode2 = new Node(new Station("Løkkegade", "28, 3. th.", 9000));
 
             Graph graph1 = rp.getGraph();
@@ -32,7 +32,7 @@ namespace test
            foreach (Node n in result)
            {
                Console.WriteLine(n.Data._street+" "+n.Data._streetNo);
-           }*/
+           }
 
             foreach (Node n in graph1.Nodes)
             {
@@ -48,14 +48,14 @@ namespace test
            foreach (Node n in result)
            {
                Console.WriteLine(n.Data._street + " " + n.Data._streetNo);
-           }*/
+           }
 
            foreach (Node n in graph2.Nodes)
            {
                Console.WriteLine(n.Data._street + " " + n.Data._streetNo);
            }
 
-           Console.ReadLine();
+           Console.ReadLine();*/
         }
     }
 }

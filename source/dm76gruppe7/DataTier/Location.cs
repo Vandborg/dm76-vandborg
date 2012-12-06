@@ -8,7 +8,7 @@ namespace DataTier
 {
     [DataContract(IsReference = true)]
     [Serializable]
-    public abstract class Location
+    public class Location
     {
         [DataMember]
         public int _id { get; private set; }

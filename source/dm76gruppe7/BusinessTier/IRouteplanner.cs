@@ -8,7 +8,9 @@ namespace BusinessTier
 {
     public interface IRouteplanner
     {
-        Graph getGraph();
+        List<Node> ShortestRoute(string start, string end);
+        //Graph getGraph();
         //Route createRoute(DateTime startDate, Node<Station> startAddress, Node<Station> endAddress);
+        string[] AddressParser(string s);
     }
 }

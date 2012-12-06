@@ -76,56 +76,8 @@ namespace DataTier
         public List<Node> ShortestPath(Node startNode, Node endNode)
         {
             List<Node> queue = _nodeSet;
-            //List<Node> queue = new List<Node>();
-            
-            /*foreach (Node n in _nodeSet)
-            {
-                if (n == startNode)
-                { 
-                    startNode = startNode.DeepClone();
-                    queue.Add(startNode);
-                    //startNode = new Node(startNode.Id, startNode.Data, startNode.Neighbors, startNode.Costs);
-                    //queue.Add(startNode);
-                }
-                else if (n == endNode)
-                {
-                   // endNode = new Node(endNode.Id, endNode.Data, endNode.Neighbors, endNode.Costs);
-                    //queue.Add(endNode);
-                    endNode = endNode.DeepClone();
-                    queue.Add(endNode);
-                }
-                else
-                {
-                    //queue.Add(new Node(n.Id, n.Data, n.Neighbors, n.Costs));
-                    queue.Add(n.DeepClone());
-                }
-            }*/
-
-            /*foreach (Node test in queue)
-            {
-                Console.WriteLine(test.Data._street + " " + test.Data._streetNo);
-            }*/
-
             Node nextNode = null;
             List<Node> shortestRoute = new List<Node>();
-
-           /* if (!_nodeSet.Contains(startNode))
-            {
-                Console.WriteLine("running");
-                queue.Add(startNode);
-                startNode.Neighbors.Add(queue.ElementAt(0));
-                startNode.Costs.Add(10);
-                //this.AddUndirectedEdge(startNode, queue.ElementAt(0),10);
-            }
-
-            if (!_nodeSet.Contains(endNode))
-            {
-                queue.Add(endNode);
-                endNode.Neighbors.Add(queue.ElementAt(2));
-                endNode.Costs.Add(5);
-                //this.AddUndirectedEdge(endNode, queue.ElementAt(2), 10);
-            }*/
-
             
             foreach(Node x in queue){
                 Debug.Write(x.Data._streetNo + " => ");
