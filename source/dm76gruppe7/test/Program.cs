@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BusinessTier;
 using DataTier;
+using DBLayer;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.InteropServices;
 using System.IO;
@@ -56,6 +57,35 @@ namespace test
            }
 
            Console.ReadLine();*/
+
+            IDBBattery dbbattery = new DBBattery();
+            Battery battery = new Battery(Battery.Status.Charged,new Station(1,"TRAFIKCENTER SÆBY SYD","20",9300));
+
+            if (dbbattery.createBattery(battery))
+            {
+                Console.WriteLine("Battery created in database");
+                List<Battery> batteries = dbbattery.getAllBatteries();
+                Console.WriteLine("-------------The new battery------------");
+                Console.WriteLine("ID: "+batteries.Last()._id.ToString());
+                Console.WriteLine("StationID: "+batteries.Last()._station._id.ToString());
+                Console.WriteLine("Status: "+batteries.Last()._status.ToString());
+                Console.WriteLine("----------------------------------------");
+
+                batteries.Last()._station = null;
+                batteries.Last()._status = Battery.Status.Booked;
+
+                if(dbbattery.updateBattery(batteries.Last()))
+                {
+                    Console.WriteLine("Battery updated in database");
+                    List<Battery> batteries2 = dbbattery.getAllBatteries();
+                    Console.WriteLine("----------The updated battery------------");
+                    Console.WriteLine("ID: " + batteries2.Last()._id.ToString());
+                    //Console.WriteLine("StationID: " + batteries2.Last()._station.ToString());
+                    Console.WriteLine("Status: " + batteries2.Last()._status.ToString());
+                    Console.WriteLine("----------------------------------------");
+                }
+            }
+            Console.ReadLine();
         }
     }
 }

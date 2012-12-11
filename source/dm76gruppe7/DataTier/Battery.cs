@@ -13,71 +13,32 @@ namespace DataTier
     [Serializable]
     public class Battery
     {
+        public enum Status { Charging=0,Charged=1,Reserved=2,Booked=3,InCar=4 }
         [DataMember]
         public int _id { get; set; }
         [DataMember]
-        public string _status { get; set; }
+        public Status _status { get; set; }
         [DataMember]
-        public PartRoute _partRoute { get; set; }
-        Object _belongs; //can be a car or a station.
+        public Station _station { get; set; }
 
         public Battery()
         {
             _id = -1;
-            _status = null;
-            _belongs = null;
-            _partRoute = null;
+            _station = null;
         }
 
-        public Battery(string status, Object belongs, PartRoute partRoute)
+        public Battery(Status status, Station station)
         {
             _id = -1;
             _status = status;
-
-            if(belongs is Car || belongs is Station)
-            {
-                _belongs = belongs;
-            }
-            else
-            {
-                _belongs = null;
-            }
-
-            _partRoute = partRoute;
+            _station = station;
         }
 
-        public Battery(int id, string status, Object belongs, PartRoute partRoute)
+        public Battery(int id, Status status, Station station)
         {
-            _id = -1;
+            _id = id;
             _status = status;
-
-            if(belongs is Car || belongs is Station)
-            {
-                _belongs = belongs;
-            }
-            else
-            {
-                _belongs = null;
-            }
-
-            _partRoute = partRoute;
-        }
-
-        [DataMember]
-        public Object Belongs
-        {
-            get { return _belongs; }
-            set 
-            { 
-                if (value is Car || value is Station)
-                {
-                    _belongs = value;
-                }
-                else
-                {
-                    _belongs = null;
-                }
-            }
+            _station = station;
         }
     }
 }
