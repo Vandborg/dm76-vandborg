@@ -11,7 +11,7 @@ namespace DataTier
     public class Location
     {
         [DataMember]
-        public int _id { get; private set; }
+        virtual public int _id { get; set; }
         [DataMember]
         public string _street { get; set; }
         [DataMember]

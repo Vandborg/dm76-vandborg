@@ -42,6 +42,13 @@ namespace DBLayer
             return insert(values);
         }
 
+        public bool deleteBattery(Battery battery)
+        {
+            string wClause = "ID="+battery._id;
+
+            return delete(wClause);
+        }
+
         public override string buildQuery(string wClause)
         {
             String query = "SELECT * FROM Battery b, Station s, Location l";
@@ -80,9 +87,16 @@ namespace DBLayer
 
         public override string insertQuery(string values)
         {
-            //String query = "INSERT INTO Battery (Status, StationID) values ("+values+")";
-            String query = "INSERT INTO Battery (Status, StationID) values (1,1)";
+            String query = "INSERT INTO Battery (Status, StationID) values ("+values+")";
+            //String query = "INSERT INTO Battery (Status, StationID) values (1,1)";
             Debug.WriteLine(query);
+            return query;
+        }
+
+        public override string deleteQuery(string wClause)
+        {
+            String query = "DELETE FROM Battery WHERE ";
+            query += wClause;
             return query;
         }
     }

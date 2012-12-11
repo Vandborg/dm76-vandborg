@@ -19,8 +19,6 @@ namespace DataTier
         public int _range { get; set; } //this in in meters
         [DataMember]
         public Customer _customer { get; private set; }
-        [DataMember]
-        public Battery _battery { get; set; }
 
         public Car()
         {
@@ -28,25 +26,22 @@ namespace DataTier
             _licensPlate = null;
             _range = -1;
             _customer = null;
-            _battery = null;
         }
 
-        public Car(string licensPlate, int range, Customer customer, Battery battery)
+        public Car(string licensPlate, int range, Customer customer)
         {
             _id = -1;
             _licensPlate = licensPlate;
             _range = range;
             _customer = customer;
-            _battery = battery;
         }
 
-        public Car(int id, string licensPlate, int range, Customer customer, Battery battery)
+        public Car(int id, string licensPlate, int range, Customer customer)
         {
             _id = id;
             _licensPlate = licensPlate;
             _range = range;
             _customer = customer;
-            _battery = battery;
         }
     }
 }

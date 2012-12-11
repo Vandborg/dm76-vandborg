@@ -13,6 +13,7 @@ namespace DBLayer
         public abstract T buildObj(SqlDataReader results);
         public abstract string updateQuery(int id, string sClause);
         public abstract string insertQuery(string values);
+        public abstract string deleteQuery(string wClause);
 
         SqlConnection connection = new SqlConnection("user id=dm76_7;" +
                                        "password=MaaGodt;server=balder.ucn.dk;" +
@@ -91,6 +92,24 @@ namespace DBLayer
         public Boolean insert(string values)
         {
             string query = insertQuery(values);
+            try
+            {
+                connection.Open();
+                SqlCommand myCommand = new SqlCommand(query, connection);
+                myCommand.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+                return false;
+            }
+            return true;
+        }
+
+        public Boolean delete(string wClause)
+        {
+            string query = deleteQuery(wClause);
             try
             {
                 connection.Open();

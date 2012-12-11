@@ -12,7 +12,7 @@ namespace DataTier
     public class Station : Location
     {
         [DataMember]
-        public int _id { get; set; }
+        public override int _id { get; set; }
         
         List<Battery> _batteries = new List<Battery>();
 

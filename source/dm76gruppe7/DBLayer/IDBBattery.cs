@@ -12,5 +12,6 @@ namespace DBLayer
         Battery searchBatteryID(int id);
         Boolean updateBattery(Battery battery);
         Boolean createBattery(Battery battery);
+        Boolean deleteBattery(Battery battery);
     }
 }
