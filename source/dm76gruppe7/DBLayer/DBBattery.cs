@@ -52,7 +52,7 @@ namespace DBLayer
         public override string buildQuery(string wClause)
         {
             String query = "SELECT * FROM Battery b, Station s, Location l";
-            query += " WHERE b.ID = s.ID AND s.ID = l.ID";
+            query += " WHERE b.StationID = s.ID AND s.LocationID = l.ID";
             if (wClause.Count() > 0)
                 query = query + " AND " + wClause;
             return query;

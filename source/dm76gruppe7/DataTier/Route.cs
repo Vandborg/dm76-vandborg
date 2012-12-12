@@ -19,9 +19,9 @@ namespace DataTier
         [DataMember]
         public DateTime _endDate { get; set; }
         [DataMember]
-        public Node _startAddress { get; set; }
+        public Location _startAddress { get; set; }
         [DataMember]
-        public Node _endAddress { get; set; }
+        public Location _endAddress { get; set; }
         [DataMember]
         public Customer _customer { get; set; }
 
@@ -37,7 +37,7 @@ namespace DataTier
             _customer = null;
         }
 
-        public Route(DateTime startDate, DateTime endDate, Node startAddress, Node endAddress, Customer customer)
+        public Route(DateTime startDate, DateTime endDate, Location startAddress, Location endAddress, Customer customer)
         {
             _id = -1;
             _startDate = startDate;
@@ -47,7 +47,7 @@ namespace DataTier
             _customer = customer;
         }
 
-        public Route(int id, DateTime startDate, DateTime endDate, Node startAddress, Node endAddress, Customer customer)
+        public Route(int id, DateTime startDate, DateTime endDate, Location startAddress, Location endAddress, Customer customer)
         {
             _id = id;
             _startDate = startDate;

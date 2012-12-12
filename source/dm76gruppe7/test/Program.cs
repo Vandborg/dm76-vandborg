@@ -142,7 +142,7 @@ namespace test
                 }
             }*/
 
-            IDBCustomer dbCustomer = new DBCustomer();
+            /*IDBCustomer dbCustomer = new DBCustomer();
             Customer Customer = new Customer("Charlotte Bust Sigvardt", "charlottebust@gmail.com");
 
             if (dbCustomer.createCustomer(Customer))
@@ -177,6 +177,94 @@ namespace test
                             Console.WriteLine("ID: " + Customer1._id.ToString());
                             Console.WriteLine("Name: " + Customer1._name);
                             Console.WriteLine("Email: " + Customer1._email);
+                        }
+                        Console.WriteLine("----------------------------------------");
+                    }
+                }
+            }*/
+
+            /*IDBLocation dbLocation = new DBLocation();
+            Location Location = new Location("Løkkegade","21 3. th.",9000);
+
+            if (dbLocation.createLocation(Location))
+            {
+                Console.WriteLine("Location created in database");
+                List<Location> Locations = dbLocation.getAllLocations();
+                Console.WriteLine("-------------The new Location------------");
+                Console.WriteLine("ID: " + Locations.Last()._id.ToString());
+                Console.WriteLine("Street: " + Locations.Last()._street);
+                Console.WriteLine("StreetNo: " + Locations.Last()._streetNo);
+                Console.WriteLine("ZipCode: " + Locations.Last()._zipCode.ToString());
+                Console.WriteLine("----------------------------------------");
+
+                Locations.Last()._street = "Danmarksgade";
+                Locations.Last()._streetNo = "61, 1.";
+
+                if (dbLocation.updateLocation(Locations.Last()))
+                {
+                    Console.WriteLine("Location updated in database");
+                    List<Location> Locations2 = dbLocation.getAllLocations();
+                    Console.WriteLine("----------The updated Location------------");
+                    Console.WriteLine("ID: " + Locations2.Last()._id.ToString());
+                    Console.WriteLine("Street: " + Locations2.Last()._street);
+                    Console.WriteLine("StreetNo: " + Locations2.Last()._streetNo);
+                    Console.WriteLine("ZipCode: " + Locations2.Last()._zipCode.ToString());
+                    Console.WriteLine("----------------------------------------");
+                    if (dbLocation.deleteLocation(Locations2.Last()))
+                    {
+                        Console.WriteLine("Location deleted in database");
+                        List<Location> Locations3 = dbLocation.getAllLocations();
+                        Console.WriteLine("----------The remaining Locations------------");
+                        foreach (Location Location1 in Locations3)
+                        {
+                            Console.WriteLine("ID: " + Location1._id.ToString());
+                            Console.WriteLine("Street: " + Location1._street);
+                            Console.WriteLine("StreetNo: " + Location1._streetNo);
+                            Console.WriteLine("ZipCode: " + Location1._zipCode.ToString());
+                        }
+                        Console.WriteLine("----------------------------------------");
+                    }
+                }
+            }*/
+
+            IDBStation dbStation = new DBStation();
+            Station Station = new Station("Løkkegade", "21 3. th.", 9000);
+
+            if (dbStation.createStation(Station))
+            {
+                Console.WriteLine("Station created in database");
+                List<Station> Stations = dbStation.getAllStations();
+                Console.WriteLine("-------------The new Station------------");
+                Console.WriteLine("ID: " + Stations.Last()._id.ToString());
+                Console.WriteLine("Street: " + Stations.Last()._street);
+                Console.WriteLine("StreetNo: " + Stations.Last()._streetNo);
+                Console.WriteLine("ZipCode: " + Stations.Last()._zipCode.ToString());
+                Console.WriteLine("----------------------------------------");
+
+                Stations.Last()._street = "Danmarksgade";
+                Stations.Last()._streetNo = "61, 1.";
+
+                if (dbStation.updateStation(Stations.Last()))
+                {
+                    Console.WriteLine("Station updated in database");
+                    List<Station> Stations2 = dbStation.getAllStations();
+                    Console.WriteLine("----------The updated Station------------");
+                    Console.WriteLine("ID: " + Stations2.Last()._id.ToString());
+                    Console.WriteLine("Street: " + Stations2.Last()._street);
+                    Console.WriteLine("StreetNo: " + Stations2.Last()._streetNo);
+                    Console.WriteLine("ZipCode: " + Stations2.Last()._zipCode.ToString());
+                    Console.WriteLine("----------------------------------------");
+                    if (dbStation.deleteStation(Stations2.Last()))
+                    {
+                        Console.WriteLine("Station deleted in database");
+                        List<Station> Stations3 = dbStation.getAllStations();
+                        Console.WriteLine("----------The remaining Stations------------");
+                        foreach (Station Station1 in Stations3)
+                        {
+                            Console.WriteLine("ID: " + Station1._id.ToString());
+                            Console.WriteLine("Street: " + Station1._street);
+                            Console.WriteLine("StreetNo: " + Station1._streetNo);
+                            Console.WriteLine("ZipCode: " + Station1._zipCode.ToString());
                         }
                         Console.WriteLine("----------------------------------------");
                     }
