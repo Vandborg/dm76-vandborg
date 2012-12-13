@@ -45,6 +45,7 @@
     <Compile Include="DBConnection.cs" />
     <Compile Include="DBCustomer.cs" />
     <Compile Include="DBLocation.cs" />
+    <Compile Include="DBNeighbors.cs" />
     <Compile Include="DBNode.cs" />
     <Compile Include="DBPartRoute.cs" />
     <Compile Include="DBRoute.cs" />
