@@ -24,8 +24,8 @@ namespace DBLayer
         public bool updateRoute(Route Route)
         {
             string sClause = "SET CustomerID=" + Convert.ToInt32(Route._customer._id).ToString();
-            sClause += ", StartDate='" + Route._startDate.ToString();
-            sClause += "', EndDate="+Route._endDate.ToString();
+            sClause += ", StartDate='" + Route._startDate.ToString("yyyy-MM-dd HH:mm:ss");
+            sClause += "', EndDate='" + Route._endDate.ToString("yyyy-MM-dd HH:mm:ss");
             sClause += "', StartAddress="+Route._startAddress._id.ToString();
             sClause += ", EndAddress="+Route._endAddress._id.ToString();
 
@@ -35,8 +35,8 @@ namespace DBLayer
         public bool createRoute(Route Route)
         {
             string values = Route._customer._id.ToString();
-            values += ", '"+Route._startDate.ToString()+"', '";
-            values += Route._endDate.ToString() + "', ";
+            values += ", '" + Route._startDate.ToString("yyyy-MM-dd HH:mm:ss") + "', '";
+            values += Route._endDate.ToString("yyyy-MM-dd HH:mm:ss") + "', ";
             values += Route._startAddress._id.ToString() + ", ";
             values += Route._endAddress._id.ToString();
             
@@ -82,12 +82,14 @@ namespace DBLayer
             string query = "UPDATE Route ";
             query += sClause;
             query += " WHERE ID=" + id.ToString();
+            Debug.WriteLine(query);
             return query;
         }
 
         public override string insertQuery(string values)
         {
             String query = "INSERT INTO Route (CustomerID, StartDate, EndDate, StartAddress, EndAddress) values (" + values + ")";
+            Debug.WriteLine(query);
             return query;
         }
 

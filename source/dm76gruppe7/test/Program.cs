@@ -227,7 +227,7 @@ namespace test
                 }
             }*/
 
-            IDBStation dbStation = new DBStation();
+            /*IDBStation dbStation = new DBStation();
             Station Station = new Station("Løkkegade", "21 3. th.", 9000);
 
             if (dbStation.createStation(Station))
@@ -269,7 +269,58 @@ namespace test
                         Console.WriteLine("----------------------------------------");
                     }
                 }
-            }
+            }*/
+
+            /*IDBRoute dbRoute = new DBRoute();
+            Route Route = new Route(DateTime.Now,DateTime.Now,new Location(1,"Løkkegade","21",9000),new Location(2,"Danmarksgade","69",9000),new Customer(1,"Jesper Vandborg","jesper@vandborg.net"));
+
+            if (dbRoute.createRoute(Route))
+            {
+                Console.WriteLine("Route created in database");
+                List<Route> Routes = dbRoute.getAllRoutes();
+                Console.WriteLine("-------------The new Route------------");
+                Console.WriteLine("ID: " + Routes.Last()._id.ToString());
+                Console.WriteLine("StartDate: " + Routes.Last()._startDate.ToString());
+                Console.WriteLine("EndDate: " + Routes.Last()._endDate.ToString());
+                Console.WriteLine("StartAddressID: " + Routes.Last()._startAddress._id.ToString());
+                Console.WriteLine("EndAddressID: " + Routes.Last()._endAddress._id.ToString());
+                Console.WriteLine("----------------------------------------");
+
+                Routes.Last()._startDate = Convert.ToDateTime("2012-12-12 12:12:12");
+                Routes.Last()._endDate = Convert.ToDateTime("2012-12-12 12:12:12");
+
+                if (dbRoute.updateRoute(Routes.Last()))
+                {
+                    Console.WriteLine("Route updated in database");
+                    List<Route> Routes2 = dbRoute.getAllRoutes();
+                    Console.WriteLine("----------The updated Route------------");
+                    Console.WriteLine("ID: " + Routes2.Last()._id.ToString());
+                    Console.WriteLine("StartDate: " + Routes2.Last()._startDate.ToString());
+                    Console.WriteLine("EndDate: " + Routes2.Last()._endDate.ToString());
+                    Console.WriteLine("StartAddressID: " + Routes2.Last()._startAddress._id.ToString());
+                    Console.WriteLine("EndAddressID: " + Routes2.Last()._endAddress._id.ToString());
+                    Console.WriteLine("----------------------------------------");
+                    if (dbRoute.deleteRoute(Routes2.Last()))
+                    {
+                        Console.WriteLine("Route deleted in database");
+                        List<Route> Routes3 = dbRoute.getAllRoutes();
+                        Console.WriteLine("----------The remaining Routes------------");
+                        foreach (Route Route1 in Routes3)
+                        {
+                            Console.WriteLine("ID: " + Route1._id.ToString());
+                            Console.WriteLine("StartDate: " + Route1._startDate.ToString());
+                            Console.WriteLine("EndDate: " + Route1._endDate.ToString());
+                            Console.WriteLine("StartAddressID: " + Route1._startAddress._id.ToString());
+                            Console.WriteLine("EndAddressID: " + Route1._endAddress._id.ToString());
+                        }
+                        Console.WriteLine("----------------------------------------");
+                    }
+                }
+            }*/
+
+            Location test = new Location();
+
+            Console.WriteLine(test.GetType() == typeof(Location)); // false 
 
             Console.ReadLine();
         }
