@@ -46,6 +46,7 @@
     <Compile Include="DBCustomer.cs" />
     <Compile Include="DBLocation.cs" />
     <Compile Include="DBNode.cs" />
+    <Compile Include="DBPartRoute.cs" />
     <Compile Include="DBRoute.cs" />
     <Compile Include="DBStation.cs" />
     <Compile Include="dm76_7DataSet.Designer.cs">
@@ -57,7 +58,9 @@
     <Compile Include="IDBCar.cs" />
     <Compile Include="IDBCustomer.cs" />
     <Compile Include="IDBLocation.cs" />
+    <Compile Include="IDBNeighbors.cs" />
     <Compile Include="IDBNode.cs" />
+    <Compile Include="IDBPartRoute.cs" />
     <Compile Include="IDBRoute.cs" />
     <Compile Include="IDBStation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

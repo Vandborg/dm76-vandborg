@@ -51,10 +51,11 @@ namespace DBLayer
 
         public override string buildQuery(string wClause)
         {
-            String query = "SELECT * FROM Battery b, Station s, Location l";
-            query += " WHERE b.StationID = s.ID AND s.LocationID = l.ID";
+            String query = "SELECT * FROM Battery b, Station s";
+            query += " WHERE (b.StationID = s.ID OR b.StationID IS NULL)";
             if (wClause.Count() > 0)
                 query = query + " AND " + wClause;
+            Debug.WriteLine(query);
             return query;
         }
 
@@ -65,9 +66,16 @@ namespace DBLayer
             {
                 addObj._id = Convert.ToInt32(results[0].ToString());
                 addObj._status = (Battery.Status)Convert.ToInt32(results[1].ToString());
-                addObj._station = new Station(Convert.ToInt32(results[2].ToString()), 
-                                              results[6].ToString(), results[7].ToString(), 
-                                              Convert.ToInt32(results[8].ToString()));
+                if(results[2].ToString()=="null")
+                {
+                    addObj._station = null;
+                }
+                else
+                {
+                    addObj._station = new Station(Convert.ToInt32(results[3].ToString()), 
+                                                results[4].ToString(), results[5].ToString(), 
+                                                Convert.ToInt32(results[6].ToString()));
+                }
             }
             catch (Exception e)
             {
@@ -82,6 +90,7 @@ namespace DBLayer
             string query = "UPDATE Battery ";
             query += sClause;
             query += " WHERE ID="+id.ToString();
+            Debug.WriteLine(query);
             return query;
         }
 
@@ -97,6 +106,7 @@ namespace DBLayer
         {
             String query = "DELETE FROM Battery WHERE ";
             query += wClause;
+            Debug.WriteLine(query);
             return query;
         }
     }

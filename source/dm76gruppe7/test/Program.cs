@@ -58,7 +58,7 @@ namespace test
 
            Console.ReadLine();*/
 
-            /*IDBBattery dbbattery = new DBBattery();
+            IDBBattery dbbattery = new DBBattery();
             Battery battery = new Battery(Battery.Status.Charged,new Station(1,"TRAFIKCENTER SÆBY SYD","20",9300));
 
             if (dbbattery.createBattery(battery))
@@ -83,7 +83,7 @@ namespace test
                     //Console.WriteLine("StationID: " + batteries2.Last()._station.ToString());
                     Console.WriteLine("Status: " + batteries2.Last()._status.ToString());
                     Console.WriteLine("----------------------------------------");
-                    if(dbbattery.deleteBattery(batteries.Last()))
+                    if(dbbattery.deleteBattery(batteries2.Last()))
                     {
                         Console.WriteLine("Battery deleted in database");
                         List<Battery> batteries3 = dbbattery.getAllBatteries();
@@ -97,7 +97,7 @@ namespace test
                         Console.WriteLine("----------------------------------------");
                     }
                 }
-            }*/
+            }
 
             /*IDBCar dbcar = new DBCar();
             Car car = new Car("dd12319",150,new Customer(1,"Jesper Vandborg","jesper@vandborg.net"));
@@ -317,10 +317,6 @@ namespace test
                     }
                 }
             }*/
-
-            Location test = new Location();
-
-            Console.WriteLine(test.GetType() == typeof(Location)); // false 
 
             Console.ReadLine();
         }
