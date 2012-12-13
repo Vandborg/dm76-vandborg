@@ -21,7 +21,7 @@ namespace DataTier
         [DataMember]
         public List<Node> Neighbors { get; set; }
         [DataMember]
-        public List<int> Costs { get; private set; }
+        public List<int> Costs { get; set; }
         [DataMember]
         public int Label { get; set; }
         [DataMember]

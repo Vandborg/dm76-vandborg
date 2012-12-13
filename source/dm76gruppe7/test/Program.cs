@@ -58,7 +58,7 @@ namespace test
 
            Console.ReadLine();*/
 
-            IDBBattery dbbattery = new DBBattery();
+            /*IDBBattery dbbattery = new DBBattery();
             Battery battery = new Battery(Battery.Status.Charged,new Station(1,"TRAFIKCENTER SÆBY SYD","20",9300));
 
             if (dbbattery.createBattery(battery))
@@ -97,7 +97,7 @@ namespace test
                         Console.WriteLine("----------------------------------------");
                     }
                 }
-            }
+            }*/
 
             /*IDBCar dbcar = new DBCar();
             Car car = new Car("dd12319",150,new Customer(1,"Jesper Vandborg","jesper@vandborg.net"));
@@ -317,6 +317,61 @@ namespace test
                     }
                 }
             }*/
+
+            IDBPartRoute dbPartRoute = new DBPartRoute();
+            PartRoute PartRoute = new PartRoute(DateTime.Now, new Battery(5, Battery.Status.Charged, new Station(1,"TRAFIKCENTER SÆBY SYD", "20", 9300)), new Route(2, Convert.ToDateTime("2012-12-12 12:12:13.000"), Convert.ToDateTime("2012-12-13 12:12:12.000"),new Location(1,"Løkkegade","21",9000),new Location(2,"Danmarksgade","69",9000),new Customer(1,"Jesper Vandborg","jesper@vandborg.net")));
+
+            if (dbPartRoute.createPartRoute(PartRoute))
+            {
+                Console.WriteLine("PartRoute created in database");
+                List<PartRoute> PartRoutes = dbPartRoute.getAllPartRoutes();
+                Console.WriteLine("-------------The new PartRoute------------");
+                Console.WriteLine("ID: " + PartRoutes.Last()._id.ToString());
+                Console.WriteLine("PickUpTime: " + PartRoutes.Last()._pickUpTime.ToString());
+                Console.WriteLine("BatteryID: " + PartRoutes.Last()._battery._id.ToString());
+                Console.WriteLine("StationID: " + PartRoutes.Last()._battery._station._id.ToString());
+                Console.WriteLine("RouteID: " + PartRoutes.Last()._route._id.ToString());
+                Console.WriteLine("CustomerID: " + PartRoutes.Last()._route._customer._id.ToString());
+                Console.WriteLine("StartAddressID: " + PartRoutes.Last()._route._startAddress._id.ToString());
+                Console.WriteLine("endAddressID: " + PartRoutes.Last()._route._endAddress._id.ToString());
+                Console.WriteLine("----------------------------------------");
+
+                PartRoutes.Last()._pickUpTime = Convert.ToDateTime("2012-12-19 12:12:12");
+
+                if (dbPartRoute.updatePartRoute(PartRoutes.Last()))
+                {
+                    Console.WriteLine("PartRoute updated in database");
+                    List<PartRoute> PartRoutes2 = dbPartRoute.getAllPartRoutes();
+                    Console.WriteLine("----------The updated PartRoute------------");
+                    Console.WriteLine("ID: " + PartRoutes2.Last()._id.ToString());
+                    Console.WriteLine("PickUpTime: " + PartRoutes2.Last()._pickUpTime.ToString());
+                    Console.WriteLine("BatteryID: " + PartRoutes2.Last()._battery._id.ToString());
+                    Console.WriteLine("StationID: " + PartRoutes2.Last()._battery._station._id.ToString());
+                    Console.WriteLine("RouteID: " + PartRoutes2.Last()._route._id.ToString());
+                    Console.WriteLine("CustomerID: " + PartRoutes2.Last()._route._customer._id.ToString());
+                    Console.WriteLine("StartAddressID: " + PartRoutes2.Last()._route._startAddress._id.ToString());
+                    Console.WriteLine("endAddressID: " + PartRoutes2.Last()._route._endAddress._id.ToString());
+                    Console.WriteLine("----------------------------------------");
+                    if (dbPartRoute.deletePartRoute(PartRoutes2.Last()))
+                    {
+                        Console.WriteLine("PartRoute deleted in database");
+                        List<PartRoute> PartRoutes3 = dbPartRoute.getAllPartRoutes();
+                        Console.WriteLine("----------The remaining PartRoutes------------");
+                        foreach (PartRoute PartRoute1 in PartRoutes3)
+                        {
+                            Console.WriteLine("ID: " + PartRoute1._id.ToString());
+                            Console.WriteLine("PickUpTime: " + PartRoute1._pickUpTime.ToString());
+                            Console.WriteLine("BatteryID: " + PartRoute1._battery._id.ToString());
+                            Console.WriteLine("StationID: " + PartRoute1._battery._station._id.ToString());
+                            Console.WriteLine("RouteID: " + PartRoute1._route._id.ToString());
+                            Console.WriteLine("CustomerID: " + PartRoute1._route._customer._id.ToString());
+                            Console.WriteLine("StartAddressID: " + PartRoute1._route._startAddress._id.ToString());
+                            Console.WriteLine("endAddressID: " + PartRoute1._route._endAddress._id.ToString());
+                        }
+                        Console.WriteLine("----------------------------------------");
+                    }
+                }
+            }
 
             Console.ReadLine();
         }

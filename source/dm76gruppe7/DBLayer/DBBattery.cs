@@ -17,7 +17,7 @@ namespace DBLayer
 
         public Battery searchBatteryID(int id)
         {
-            String wClause = "b.ID = " + id + " ";
+            String wClause = "WHERE b.ID = " + id + " ";
             return singleWhere(wClause);
         }
 
@@ -51,10 +51,10 @@ namespace DBLayer
 
         public override string buildQuery(string wClause)
         {
-            String query = "SELECT * FROM Battery b, Station s";
-            query += " WHERE (b.StationID = s.ID OR b.StationID IS NULL)";
+            String query = "SELECT * FROM Battery b LEFT JOIN Station s";
+            query += " ON b.StationID=s.ID ";
             if (wClause.Count() > 0)
-                query = query + " AND " + wClause;
+                query += wClause;
             Debug.WriteLine(query);
             return query;
         }
@@ -90,15 +90,12 @@ namespace DBLayer
             string query = "UPDATE Battery ";
             query += sClause;
             query += " WHERE ID="+id.ToString();
-            Debug.WriteLine(query);
             return query;
         }
 
         public override string insertQuery(string values)
         {
             String query = "INSERT INTO Battery (Status, StationID) values ("+values+")";
-            //String query = "INSERT INTO Battery (Status, StationID) values (1,1)";
-            Debug.WriteLine(query);
             return query;
         }
 
@@ -106,7 +103,6 @@ namespace DBLayer
         {
             String query = "DELETE FROM Battery WHERE ";
             query += wClause;
-            Debug.WriteLine(query);
             return query;
         }
     }
