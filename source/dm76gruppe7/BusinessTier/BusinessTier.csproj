@@ -51,6 +51,10 @@
       <Project>{DA3E468C-A62E-4868-9C77-AC821DB1F932}</Project>
       <Name>DataTier</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DBLayer\DBLayer.csproj">
+      <Project>{FCB5416C-62F1-4E2A-933B-76013F17C5C2}</Project>
+      <Name>DBLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

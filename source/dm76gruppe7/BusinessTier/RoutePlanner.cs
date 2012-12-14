@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataTier;
 using System.Diagnostics;
+using DBLayer;
 
 namespace BusinessTier
 {
@@ -14,7 +15,32 @@ namespace BusinessTier
         public RoutePlanner()
         {
             graph = new Graph();
-            Node node1 = new Node(new Station("Løkkegade","21, 3. th.",9000));
+            IDBNode dbNodes = new DBNode();
+            IDBNeighbors dbNeighbors = new DBNeighbors();
+
+            List<Node> Nodes = dbNodes.getAllNodes();
+
+            foreach(Node node in Nodes)
+            {
+                graph.AddNode(node);
+            }
+
+            foreach (Node node in graph.Nodes)
+            {
+                List<List<int>> Neighbors = dbNeighbors.getAllNeighbors(node);
+                foreach (int i in Neighbors.ElementAt(0))
+                {
+                   int count = 0;
+                   foreach(Node Neighbor in graph.Nodes)
+                   if(Neighbor.Id==i)
+                   {
+                       graph.AddDirectedEdge(node, Neighbor,Neighbors.ElementAt(1).ElementAt(count));
+                   }
+                   count++;
+                }
+            }
+
+            /*Node node1 = new Node(new Station("Løkkegade","21, 3. th.",9000));
             Node node2 = new Node(new Station("Løkkegade", "22, 3. th.", 9000));
             Node node3 = new Node(new Station("Løkkegade", "23, 3. th.", 9000));
             Node node4 = new Node(new Station("Løkkegade", "24, 3. th.", 9000));
@@ -35,7 +61,7 @@ namespace BusinessTier
             graph.AddUndirectedEdge(node4, node3, 10);
             graph.AddUndirectedEdge(node4, node6, 5);
             graph.AddUndirectedEdge(node4, node5, 20);
-            graph.AddUndirectedEdge(node5, node2, 15);
+            graph.AddUndirectedEdge(node5, node2, 15);*/
 
         }
 
@@ -49,13 +75,19 @@ namespace BusinessTier
                 string[] endAddress = AddressParser(end);
                 Node startNode = new Node(new Location(startAddress[0], startAddress[1], Convert.ToInt32(startAddress[2])));
                 Node endNode = new Node(new Location(endAddress[0], endAddress[1], Convert.ToInt32(endAddress[2])));
-                Graph tempGraph = graph.DeepClone();
-                tempGraph.AddNode(startNode);
-                tempGraph.AddNode(endNode);
-                tempGraph.AddUndirectedEdge(startNode, tempGraph.Nodes.ElementAt(0), 10);
-                tempGraph.AddUndirectedEdge(endNode, tempGraph.Nodes.ElementAt(5), 5);
+                //Graph tempGraph = graph.DeepClone();
+                /*graph.AddNode(startNode);
+                graph.AddNode(endNode);
+                graph.AddUndirectedEdge(startNode, graph.Nodes.ElementAt(0), 10);
+                graph.AddUndirectedEdge(endNode, graph.Nodes.ElementAt(5), 5);*/
 
-                result = tempGraph.ShortestPath(startNode, endNode);
+                Debug.WriteLine("--------------------------------------------------------");
+                Debug.WriteLine("ElementAt(0): "+graph.Nodes.ElementAt(0).Data._street);
+                Debug.WriteLine("ElementAt(5): " + graph.Nodes.ElementAt(5).Data._street);
+                Debug.WriteLine("--------------------------------------------------------");
+
+                //result = graph.ShortestPath(startNode, endNode);
+                result = graph.ShortestPath(graph.Nodes.ElementAt(0), graph.Nodes.ElementAt(5));
             }
             catch(Exception e)
             {

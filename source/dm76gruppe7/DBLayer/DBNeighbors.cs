@@ -8,17 +8,41 @@ using DataTier;
 
 namespace DBLayer
 {
-    public class DBNeighbors : DBConnection<Node>, IDBNeighbors
+    public class DBNeighbors : DBConnection<int>, IDBNeighbors
     {
 
-        public List<Node> getAllNeighbors(Node FromNode)
+        public List<List<int>> getAllNeighbors(Node FromNode)
         {
-            return miscWhere("FromNodeID="+FromNode.Id.ToString());
+            List<List<int>> results = new List<List<int>>();
+            string wClause = "FromNodeID=" + FromNode.Id.ToString();
+            results.Add(miscWhere(wClause));
+            results.Add(getAllCosts(wClause));
+            return results;
         }
 
-        public List<int> getAllCosts(Node FromNode)
+        //Hackish
+        public List<int> getAllCosts(string wClause)
         {
-            throw new NotImplementedException();
+            List<int> objResults = new List<int>();
+            String query = buildQuery(wClause);
+            try
+            {
+                connection.Open();
+                SqlDataReader myReader = null;
+                SqlCommand myCommand = new SqlCommand(query, connection);
+                myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    int addObj = buildCost(myReader);
+                    objResults.Add(addObj);
+                }
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+            return objResults;
         }
 
         public bool updateNeighbors(List<Node> Neighbors, List<int> Costs)
@@ -44,10 +68,34 @@ namespace DBLayer
             return query;
         }
 
-        public override Node buildObj(SqlDataReader results)
+        public override int buildObj(SqlDataReader results)
         {
-            //Create something with DBNodes
-            throw new NotImplementedException();
+            int addObj = new int();
+            try
+            {
+                addObj = Convert.ToInt32(results[2].ToString());
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error in \"building\" Neighbor int: " + e.ToString());
+            }
+
+            return addObj;
+        }
+
+        public int buildCost(SqlDataReader results)
+        {
+            int addObj = new int();
+            try
+            {
+                addObj = Convert.ToInt32(results[3].ToString());
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error in \"building\" Neighbor cost: " + e.ToString());
+            }
+
+            return addObj;
         }
 
         public override string updateQuery(int id, string sClause)
@@ -64,5 +112,6 @@ namespace DBLayer
         {
             throw new NotImplementedException();
         }
+
     }
 }

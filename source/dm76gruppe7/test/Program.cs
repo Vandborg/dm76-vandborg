@@ -8,6 +8,8 @@ using DBLayer;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Net;
+using System.Runtime.Serialization.Json;
 
 namespace test
 {
@@ -318,7 +320,7 @@ namespace test
                 }
             }*/
 
-            IDBPartRoute dbPartRoute = new DBPartRoute();
+            /*IDBPartRoute dbPartRoute = new DBPartRoute();
             PartRoute PartRoute = new PartRoute(DateTime.Now, new Battery(5, Battery.Status.Charged, new Station(1,"TRAFIKCENTER SÆBY SYD", "20", 9300)), new Route(2, Convert.ToDateTime("2012-12-12 12:12:13.000"), Convert.ToDateTime("2012-12-13 12:12:12.000"),new Location(1,"Løkkegade","21",9000),new Location(2,"Danmarksgade","69",9000),new Customer(1,"Jesper Vandborg","jesper@vandborg.net")));
 
             if (dbPartRoute.createPartRoute(PartRoute))
@@ -371,7 +373,27 @@ namespace test
                         Console.WriteLine("----------------------------------------");
                     }
                 }
-            }
+            }*/
+
+            /*IDBNode dbNode = new DBNode();
+            IDBNeighbors dbNeighbors = new DBNeighbors();
+
+            List<Node> testNodes = dbNode.getAllNodes();
+            Node testNode = dbNode.searchNodeID(6);
+            List<List<int>> Neighbors = dbNeighbors.getAllNeighbors(testNode);
+            
+            foreach(List<int> list1 in Neighbors)
+            {
+                Console.WriteLine("--------------------");
+                foreach(int i in list1)
+                {
+                    Console.WriteLine("Value: "+i.ToString());
+                }
+                Console.WriteLine("--------------------");
+            }*/
+
+            WebClient webclient = new WebClient();
+            dynamic result = 
 
             Console.ReadLine();
         }

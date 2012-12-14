@@ -15,7 +15,7 @@ namespace DBLayer
         public abstract string insertQuery(string values);
         public abstract string deleteQuery(string wClause);
 
-        SqlConnection connection = new SqlConnection("user id=dm76_7;" +
+        public SqlConnection connection = new SqlConnection("user id=dm76_7;" +
                                        "password=MaaGodt;server=balder.ucn.dk;" +
                                        "Trusted_Connection=no;" +
                                        "database=dm76_7; " +

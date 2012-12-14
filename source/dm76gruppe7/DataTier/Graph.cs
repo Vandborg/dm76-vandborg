@@ -111,14 +111,18 @@ namespace DataTier
 
                 if (nextNode == endNode)
                 {
+                    int totalcost = 0;
                     var tmp = nextNode;
                     shortestRoute.Add(nextNode);
                     while (tmp.Previous != null)
                     {
+                        Debug.WriteLine("Costs: "+tmp.Costs.ElementAt(tmp.Neighbors.IndexOf(tmp.Previous)));
+                        totalcost += tmp.Costs.ElementAt(tmp.Neighbors.IndexOf(tmp.Previous));
                         shortestRoute.Add(tmp.Previous);
                         tmp = tmp.Previous;
                     }
                     shortestRoute.Reverse();
+                    Debug.WriteLine("Total Costs: "+totalcost.ToString());
                     break;
                 }
 
