@@ -9,7 +9,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Net;
-using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
+using System.Json;
+using System.Diagnostics;
 
 namespace test
 {
@@ -392,9 +394,32 @@ namespace test
                 Console.WriteLine("--------------------");
             }*/
 
-            WebClient webclient = new WebClient();
-            dynamic result = 
+            IDBNode dbnode = new DBNode();
+            List<Node> nodes = dbnode.getAllNodes();
+            string destination = "";
+            foreach (Node node in nodes)
+            {
+                destination += node.Data._street + "+" + node.Data._streetNo + "+" + node.Data._zipCode + "+danmark|";
+            }
 
+            destination = destination.Substring(0,destination.Length-1);
+            Debug.WriteLine(destination);
+
+            string origins = "Boulevarde+39+9000+danmark|Langdyssen+2+7600";
+
+            WebClient webclient = new WebClient();
+            dynamic result = JsonValue.Parse(webclient.DownloadString("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origins+"&destinations="+destination+"&mode=driving&language=da&sensor=false"));
+            Console.WriteLine(result.rows[1].elements[1].distance.text);
+            for (int i = 0; i < result.rows.Count; i++)
+            {
+                //Console.WriteLine(result.rows[i]);
+                for (int j = 0; j < result.rows[i].elements.Count; j++ )
+                {
+                    Console.WriteLine(j.ToString()+": "+result.rows[i].elements[j].distance.value);
+                    //Console.WriteLine(j.ToString() + ": " + result.rows[i].elements[j].status);
+                }
+            }
+            //Console.WriteLine(result.rows[0].elements[0].distance.value.ToString());
             Console.ReadLine();
         }
     }
