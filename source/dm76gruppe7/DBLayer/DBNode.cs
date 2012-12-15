@@ -64,10 +64,11 @@ namespace DBLayer
 
         public override string buildQuery(string wClause)
         {
-            String query = "SELECT * FROM Node n, Station s, Location l";
-            query += " WHERE n.LocationID = l.ID OR n.StationID=s.ID";
+            String query = "SELECT * FROM Node n";
+            query += " LEFT JOIN Station s ON n.StationID=s.ID";
+            query += " LEFT JOIN Location l ON n.LocationID = l.ID";
             if (wClause.Count() > 0)
-                query = query + " AND " + wClause;
+                query = query + " WHERE " + wClause;
             return query;
         }
 
@@ -79,19 +80,19 @@ namespace DBLayer
                 if (results[1].ToString() == "null")
                 {
                     addObj = new Node(Convert.ToInt32(results[0].ToString()),
-                                        new Station(Convert.ToInt32(results[3].ToString()),results[4].ToString(),results[5].ToString(),Convert.ToInt32(results[6].ToString()))
+                                        new Location(Convert.ToInt32(results[7].ToString()),results[8].ToString(),results[9].ToString(),Convert.ToInt32(results[10].ToString()))
                                      );
                 }
                 else
                 {
                     addObj = new Node(Convert.ToInt32(results[0].ToString()),
-                                        new Location(Convert.ToInt32(results[3].ToString()), results[4].ToString(), results[5].ToString(), Convert.ToInt32(results[6].ToString()))
+                                        new Station(Convert.ToInt32(results[3].ToString()), results[4].ToString(), results[5].ToString(), Convert.ToInt32(results[6].ToString()))
                                      );
                 }
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Error in building Route Object: " + e.ToString());
+                Debug.WriteLine("Error in building Node Object: " + e.ToString());
             }
 
             return addObj;

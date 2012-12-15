@@ -80,9 +80,9 @@ namespace DataTier
             List<Node> shortestRoute = new List<Node>();
             
             foreach(Node x in queue){
-                Debug.Write(x.Data._streetNo + " => ");
+                //Debug.Write(x.Data._streetNo + " => ");
                 foreach (var y in x.Neighbors)
-                    Debug.Print(y.Data._streetNo + " (" + x.Costs[x.Neighbors.IndexOf(y)] + ")");
+                    //Debug.Print(y.Data._streetNo + " (" + x.Costs[x.Neighbors.IndexOf(y)] + ")");
                 x.Label = int.MaxValue;
                 x.InQueue = true;
             }

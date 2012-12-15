@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfBetterplaceRest", "WcfBe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBLayer", "DBLayer\DBLayer.csproj", "{FCB5416C-62F1-4E2A-933B-76013F17C5C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{1014481B-5992-4A32-8100-2FB97A210426}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = dm76gruppe7.vsmdi
@@ -81,6 +83,16 @@ Global
 		{FCB5416C-62F1-4E2A-933B-76013F17C5C2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FCB5416C-62F1-4E2A-933B-76013F17C5C2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FCB5416C-62F1-4E2A-933B-76013F17C5C2}.Release|x86.ActiveCfg = Release|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1014481B-5992-4A32-8100-2FB97A210426}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

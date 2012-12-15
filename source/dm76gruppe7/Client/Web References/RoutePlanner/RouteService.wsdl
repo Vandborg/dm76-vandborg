@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="FindAdressOrLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindAdressOrLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindAdressOrLocationResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMapImage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="imageHeight" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="imageWidth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="showRoute" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMapImageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMapImageResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDirections">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="country" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDirectionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDirectionsResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FindAdressOrLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:FindAdressOrLocation" />
+  </wsdl:message>
+  <wsdl:message name="FindAdressOrLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:FindAdressOrLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMapImageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMapImage" />
+  </wsdl:message>
+  <wsdl:message name="GetMapImageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMapImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDirectionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDirections" />
+  </wsdl:message>
+  <wsdl:message name="GetDirectionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDirectionsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="FindAdressOrLocation">
+      <wsdl:input message="tns:FindAdressOrLocationSoapIn" />
+      <wsdl:output message="tns:FindAdressOrLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMapImage">
+      <wsdl:input message="tns:GetMapImageSoapIn" />
+      <wsdl:output message="tns:GetMapImageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDirections">
+      <wsdl:input message="tns:GetDirectionsSoapIn" />
+      <wsdl:output message="tns:GetDirectionsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindAdressOrLocation">
+      <soap:operation soapAction="http://tempuri.org/FindAdressOrLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMapImage">
+      <soap:operation soapAction="http://tempuri.org/GetMapImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDirections">
+      <soap:operation soapAction="http://tempuri.org/GetDirections" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindAdressOrLocation">
+      <soap12:operation soapAction="http://tempuri.org/FindAdressOrLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMapImage">
+      <soap12:operation soapAction="http://tempuri.org/GetMapImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDirections">
+      <soap12:operation soapAction="http://tempuri.org/GetDirections" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="http://balder.ucn.dk/RoutePlanner/RouteService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="http://balder.ucn.dk/RoutePlanner/RouteService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

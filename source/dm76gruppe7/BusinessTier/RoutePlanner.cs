@@ -5,6 +5,8 @@ using System.Text;
 using DataTier;
 using System.Diagnostics;
 using DBLayer;
+using System.Net;
+using System.Json;
 
 namespace BusinessTier
 {
@@ -19,6 +21,7 @@ namespace BusinessTier
             IDBNeighbors dbNeighbors = new DBNeighbors();
 
             List<Node> Nodes = dbNodes.getAllNodes();
+            Debug.WriteLine("First Count: "+Nodes.Count.ToString());
 
             foreach(Node node in Nodes)
             {
@@ -75,19 +78,16 @@ namespace BusinessTier
                 string[] endAddress = AddressParser(end);
                 Node startNode = new Node(new Location(startAddress[0], startAddress[1], Convert.ToInt32(startAddress[2])));
                 Node endNode = new Node(new Location(endAddress[0], endAddress[1], Convert.ToInt32(endAddress[2])));
-                //Graph tempGraph = graph.DeepClone();
-                /*graph.AddNode(startNode);
-                graph.AddNode(endNode);
-                graph.AddUndirectedEdge(startNode, graph.Nodes.ElementAt(0), 10);
-                graph.AddUndirectedEdge(endNode, graph.Nodes.ElementAt(5), 5);*/
+                Graph tempGraph = graph.DeepClone();
+                tempGraph = GoogleMapsAddEdges(tempGraph, startNode, endNode);
 
                 Debug.WriteLine("--------------------------------------------------------");
-                Debug.WriteLine("ElementAt(0): "+graph.Nodes.ElementAt(0).Data._street);
-                Debug.WriteLine("ElementAt(5): " + graph.Nodes.ElementAt(5).Data._street);
+                Debug.WriteLine("ElementAt(0): "+tempGraph.Nodes.ElementAt(0).Data._street);
+                Debug.WriteLine("ElementAt(5): " + tempGraph.Nodes.ElementAt(5).Data._street);
                 Debug.WriteLine("--------------------------------------------------------");
 
-                //result = graph.ShortestPath(startNode, endNode);
-                result = graph.ShortestPath(graph.Nodes.ElementAt(0), graph.Nodes.ElementAt(5));
+                result = tempGraph.ShortestPath(startNode, endNode);
+                //result = tempGraph.ShortestPath(tempGraph.Nodes.ElementAt(0), tempGraph.Nodes.ElementAt(5));
             }
             catch(Exception e)
             {
@@ -97,7 +97,7 @@ namespace BusinessTier
             return result;
         }
 
-        public string[] AddressParser(string s)
+        private string[] AddressParser(string s)
         {
             //Format - Løkkegade-27_3_th-9000/Løkkegade-28_3_th-9000
 
@@ -106,6 +106,71 @@ namespace BusinessTier
             split[1] = split[1].Replace("_", " ");
             
             return split;
+        }
+
+        private Graph GoogleMapsAddEdges(Graph inputGraph,Node startNode, Node endNode)
+        {
+            string startNodeAddress = startNode.Data._street+"+"+startNode.Data._streetNo+"+"+startNode.Data._zipCode+"+Danmark|";
+            string endNodeAddress = endNode.Data._street + "+" + endNode.Data._streetNo + "+" + endNode.Data._zipCode + "+Danmark";
+            string destination = "";
+            string origins = startNodeAddress+endNodeAddress;
+            
+            foreach (Node node in inputGraph.Nodes)
+            {
+                destination += node.Data._street + "+" + node.Data._streetNo + "+" + node.Data._zipCode + "+danmark|";
+            }
+
+            Debug.WriteLine("Count: "+inputGraph.Nodes.Count.ToString());
+            destination = destination.Substring(0, destination.Length - 1);
+
+            Debug.WriteLine("Origins: "+origins);
+            Debug.WriteLine("Destination: "+destination);
+
+            //string DownloadString = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origins + "&destinations=" + destination + "&mode=driving&language=da&sensor=false";
+            string DownloadString = "E:/Windows/Documents/DM76-gruppe7/testjson.json";
+            
+            Debug.WriteLine("DownloadString: "+DownloadString);
+
+            WebClient webclient = new WebClient();
+
+            dynamic result = JsonValue.Parse(webclient.DownloadString(DownloadString));
+
+            if (result.status == "OK")
+            {
+                for (int i = 0; i < result.rows.Count; i++)
+                {
+                    for (int j = 0; j < result.rows[i].elements.Count; j++)
+                    {
+                        if (result.rows[i].elements[j].status == "OK")
+                        {
+                            if (result.rows[i].elements[j].distance.value > 100000 && result.rows[i].elements[j].distance.value < 140000)
+                            {
+                                if (i == 0)
+                                {
+                                    inputGraph.AddUndirectedEdge(startNode, inputGraph.Nodes.ElementAt(j), (int)result.rows[i].elements[j].distance.value);
+                                }
+                                else
+                                {
+                                    inputGraph.AddUndirectedEdge(endNode, inputGraph.Nodes.ElementAt(j), (int)result.rows[i].elements[j].distance.value);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            inputGraph.AddNode(startNode);
+            inputGraph.AddNode(endNode);
+
+            foreach(Node node in inputGraph.Nodes)
+            {
+                Debug.WriteLine("Street: "+node.Data._street);
+                Debug.WriteLine("StreetNo: " + node.Data._streetNo);
+                Debug.WriteLine("ZipCode: " + node.Data._zipCode.ToString());
+            }
+            Debug.WriteLine("NeighborCount: "+inputGraph.Nodes.Last().Neighbors.Count().ToString());
+
+            return inputGraph;
         }
     }
 }

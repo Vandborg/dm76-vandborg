@@ -8,6 +8,7 @@ using System.Text;
 using BusinessTier;
 using DataTier;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
 
 namespace WcfBetterplaceRest
 {
@@ -19,16 +20,20 @@ namespace WcfBetterplaceRest
         public string shortestRoute(string start,string end)
         {
             List<string> resultAddresses = new List<string>();
+            List<Location> test = new List<Location>();
             List<Node> result = rp.ShortestRoute(start, end);
             foreach(Node n in result)
             {
-                string address = n.Data._street + "," + n.Data._streetNo+"," + n.Data._zipCode;
-                resultAddresses.Add(address);
+                /*string address = n.Data._street + "," + n.Data._streetNo+"," + n.Data._zipCode;
+                resultAddresses.Add(address);*/
+                test.Add(n.Data);
             }
             var jsonSerialiser = new JavaScriptSerializer();
             var json = jsonSerialiser.Serialize(resultAddresses);
+            var json2 = jsonSerialiser.Serialize(test);
+            Debug.WriteLine(json2);
 
-            return json;
+            return json2;
         }
 
         /*public string shortestRoute(string test)

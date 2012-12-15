@@ -62,6 +62,17 @@ namespace test
 
            Console.ReadLine();*/
 
+            /*IDBNode dbNode = new DBNode();
+            List<Node> nodes = dbNode.getAllNodes();
+
+            foreach(Node node in nodes)
+            {
+                Console.WriteLine("NodeID: "+node.Id);
+                Console.WriteLine("Street: "+node.Data._street);
+                Console.WriteLine("StreetNo: " + node.Data._streetNo);
+                Console.WriteLine("ZipCode: " + node.Data._zipCode);
+            }*/
+            
             /*IDBBattery dbbattery = new DBBattery();
             Battery battery = new Battery(Battery.Status.Charged,new Station(1,"TRAFIKCENTER SÆBY SYD","20",9300));
 
@@ -394,32 +405,44 @@ namespace test
                 Console.WriteLine("--------------------");
             }*/
 
-            IDBNode dbnode = new DBNode();
+            /*IDBNode dbnode = new DBNode();
             List<Node> nodes = dbnode.getAllNodes();
             string destination = "";
-            foreach (Node node in nodes)
+           foreach (Node node in nodes)
             {
                 destination += node.Data._street + "+" + node.Data._streetNo + "+" + node.Data._zipCode + "+danmark|";
             }
 
             destination = destination.Substring(0,destination.Length-1);
+            destination = "løkkegade+21+9000+danmark|danmarksgade+69+9000+danmark";
             Debug.WriteLine(destination);
 
-            string origins = "Boulevarde+39+9000+danmark|Langdyssen+2+7600";
+            string origins = "Boulevarde+39+9000+danmark|langdyssen+2+7600+danmark";
+
+            string DownloadString = "E:/Windows/Documents/DM76-gruppe7/testjson.json";
 
             WebClient webclient = new WebClient();
-            dynamic result = JsonValue.Parse(webclient.DownloadString("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origins+"&destinations="+destination+"&mode=driving&language=da&sensor=false"));
-            Console.WriteLine(result.rows[1].elements[1].distance.text);
-            for (int i = 0; i < result.rows.Count; i++)
+            //dynamic result = JsonValue.Parse(webclient.DownloadString("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origins+"&destinations="+destination+"&mode=driving&language=da&sensor=false"));
+            dynamic result = JsonValue.Parse(webclient.DownloadString(DownloadString));
+
+            if (result.status=="OK")
             {
-                //Console.WriteLine(result.rows[i]);
-                for (int j = 0; j < result.rows[i].elements.Count; j++ )
+                for (int i = 0; i < result.rows.Count; i++)
                 {
-                    Console.WriteLine(j.ToString()+": "+result.rows[i].elements[j].distance.value);
-                    //Console.WriteLine(j.ToString() + ": " + result.rows[i].elements[j].status);
+                    for (int j = 0; j < result.rows[i].elements.Count; j++)
+                    {
+                        if (result.rows[i].elements[j].status=="OK")
+                        {
+                            if (result.rows[i].elements[j].distance.value > 100000 && result.rows[i].elements[j].distance.value<145000)
+                            {
+                                Console.WriteLine(j.ToString() + ": " + result.rows[i].elements[j].distance.value);
+                            }
+                        }
+                    }
                 }
-            }
-            //Console.WriteLine(result.rows[0].elements[0].distance.value.ToString());
+            }*/
+
+
             Console.ReadLine();
         }
     }
