@@ -15,10 +15,10 @@ namespace WcfBetterplaceRest
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     public class RemoteRoutePlanner : IRemoteRoutePlanner
     {
-        static IRouteplanner rp = new RoutePlanner();
         
         public string shortestRoute(string start,string end)
         {
+            IRouteplanner rp = new RoutePlanner();
             List<string> resultAddresses = new List<string>();
             List<Location> test = new List<Location>();
             List<Node> result = rp.ShortestRoute(start, end);
@@ -28,6 +28,7 @@ namespace WcfBetterplaceRest
                 resultAddresses.Add(address);*/
                 test.Add(n.Data);
             }
+            Debug.WriteLine("remote result count: "+result.Count.ToString());
             var jsonSerialiser = new JavaScriptSerializer();
             var json = jsonSerialiser.Serialize(resultAddresses);
             var json2 = jsonSerialiser.Serialize(test);

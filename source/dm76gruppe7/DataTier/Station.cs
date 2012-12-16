@@ -40,7 +40,7 @@ namespace DataTier
             _zipCode = zipCode;
         }
 
-        [DataMember]
+        /*[DataMember]
         public List<Battery> Batteries
         {
             get { return _batteries; }
@@ -64,6 +64,6 @@ namespace DataTier
         public void RemoveBattery(Battery battery)
         {
             _batteries.Remove(battery);
-        }
+        }*/
     }
 }

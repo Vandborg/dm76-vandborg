@@ -73,10 +73,23 @@ namespace test
                 Console.WriteLine("ZipCode: " + node.Data._zipCode);
             }*/
             
-            /*IDBBattery dbbattery = new DBBattery();
-            Battery battery = new Battery(Battery.Status.Charged,new Station(1,"TRAFIKCENTER SÆBY SYD","20",9300));
+            IDBBattery dbbattery = new DBBattery();
+            List<Battery> battery = dbbattery.getAllBatteries();
 
-            if (dbbattery.createBattery(battery))
+            battery.First()._status = Battery.Status.Booked;
+            dbbattery.updateBattery(battery.First());
+            /*Battery battery = new Battery(Battery.Status.Charged,new Station(1,"TRAFIKCENTER SÆBY SYD","20",9300));
+            IDBStation dbstation = new DBStation();
+            List<Station> stations = dbstation.getAllStations();
+
+            foreach (Station station in stations)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    dbbattery.createBattery(new Battery(Battery.Status.Charged, station));
+                }
+            }*/
+            /*if (dbbattery.createBattery(battery))
             {
                 Console.WriteLine("Battery created in database");
                 List<Battery> batteries = dbbattery.getAllBatteries();

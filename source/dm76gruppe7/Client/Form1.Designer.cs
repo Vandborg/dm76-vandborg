@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.fromStreet = new System.Windows.Forms.TextBox();
+            this.fromStreetNo = new System.Windows.Forms.TextBox();
+            this.fromFloor = new System.Windows.Forms.TextBox();
+            this.fromSide = new System.Windows.Forms.TextBox();
+            this.fromZipCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,54 +44,55 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.toZipCode = new System.Windows.Forms.TextBox();
+            this.toSide = new System.Windows.Forms.TextBox();
+            this.toFloor = new System.Windows.Forms.TextBox();
+            this.toStreetNo = new System.Windows.Forms.TextBox();
+            this.toStreet = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.map = new System.Windows.Forms.PictureBox();
+            this.book = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.map)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // fromStreet
             // 
-            this.textBox1.Location = new System.Drawing.Point(94, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(159, 20);
-            this.textBox1.TabIndex = 0;
+            this.fromStreet.Location = new System.Drawing.Point(94, 37);
+            this.fromStreet.Name = "fromStreet";
+            this.fromStreet.Size = new System.Drawing.Size(159, 20);
+            this.fromStreet.TabIndex = 0;
             // 
-            // textBox2
+            // fromStreetNo
             // 
-            this.textBox2.Location = new System.Drawing.Point(94, 63);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(159, 20);
-            this.textBox2.TabIndex = 1;
+            this.fromStreetNo.Location = new System.Drawing.Point(94, 63);
+            this.fromStreetNo.Name = "fromStreetNo";
+            this.fromStreetNo.Size = new System.Drawing.Size(159, 20);
+            this.fromStreetNo.TabIndex = 1;
             // 
-            // textBox3
+            // fromFloor
             // 
-            this.textBox3.Location = new System.Drawing.Point(94, 89);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(159, 20);
-            this.textBox3.TabIndex = 2;
+            this.fromFloor.Location = new System.Drawing.Point(94, 89);
+            this.fromFloor.Name = "fromFloor";
+            this.fromFloor.Size = new System.Drawing.Size(159, 20);
+            this.fromFloor.TabIndex = 2;
             // 
-            // textBox4
+            // fromSide
             // 
-            this.textBox4.Location = new System.Drawing.Point(94, 115);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(159, 20);
-            this.textBox4.TabIndex = 3;
+            this.fromSide.Location = new System.Drawing.Point(94, 115);
+            this.fromSide.Name = "fromSide";
+            this.fromSide.Size = new System.Drawing.Size(159, 20);
+            this.fromSide.TabIndex = 3;
             // 
-            // textBox5
+            // fromZipCode
             // 
-            this.textBox5.Location = new System.Drawing.Point(94, 141);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(159, 20);
-            this.textBox5.TabIndex = 4;
+            this.fromZipCode.Location = new System.Drawing.Point(94, 141);
+            this.fromZipCode.Name = "fromZipCode";
+            this.fromZipCode.Size = new System.Drawing.Size(159, 20);
+            this.fromZipCode.TabIndex = 4;
             // 
             // label1
             // 
@@ -182,40 +184,40 @@
             this.label10.TabIndex = 15;
             this.label10.Text = "Gade";
             // 
-            // textBox6
+            // toZipCode
             // 
-            this.textBox6.Location = new System.Drawing.Point(94, 303);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(159, 20);
-            this.textBox6.TabIndex = 14;
+            this.toZipCode.Location = new System.Drawing.Point(94, 303);
+            this.toZipCode.Name = "toZipCode";
+            this.toZipCode.Size = new System.Drawing.Size(159, 20);
+            this.toZipCode.TabIndex = 14;
             // 
-            // textBox7
+            // toSide
             // 
-            this.textBox7.Location = new System.Drawing.Point(94, 277);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(159, 20);
-            this.textBox7.TabIndex = 13;
+            this.toSide.Location = new System.Drawing.Point(94, 277);
+            this.toSide.Name = "toSide";
+            this.toSide.Size = new System.Drawing.Size(159, 20);
+            this.toSide.TabIndex = 13;
             // 
-            // textBox8
+            // toFloor
             // 
-            this.textBox8.Location = new System.Drawing.Point(94, 251);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(159, 20);
-            this.textBox8.TabIndex = 12;
+            this.toFloor.Location = new System.Drawing.Point(94, 251);
+            this.toFloor.Name = "toFloor";
+            this.toFloor.Size = new System.Drawing.Size(159, 20);
+            this.toFloor.TabIndex = 12;
             // 
-            // textBox9
+            // toStreetNo
             // 
-            this.textBox9.Location = new System.Drawing.Point(94, 225);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(159, 20);
-            this.textBox9.TabIndex = 11;
+            this.toStreetNo.Location = new System.Drawing.Point(94, 225);
+            this.toStreetNo.Name = "toStreetNo";
+            this.toStreetNo.Size = new System.Drawing.Size(159, 20);
+            this.toStreetNo.TabIndex = 11;
             // 
-            // textBox10
+            // toStreet
             // 
-            this.textBox10.Location = new System.Drawing.Point(94, 199);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(159, 20);
-            this.textBox10.TabIndex = 10;
+            this.toStreet.Location = new System.Drawing.Point(94, 199);
+            this.toStreet.Name = "toStreet";
+            this.toStreet.Size = new System.Drawing.Size(159, 20);
+            this.toStreet.TabIndex = 10;
             // 
             // label11
             // 
@@ -240,6 +242,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.book);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(4, 2);
             this.groupBox1.Name = "groupBox1";
@@ -257,20 +260,34 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // pictureBox1
+            // map
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(286, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(480, 380);
-            this.pictureBox1.TabIndex = 23;
-            this.pictureBox1.TabStop = false;
+            this.map.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.map.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.map.Image = ((System.Drawing.Image)(resources.GetObject("map.Image")));
+            this.map.Location = new System.Drawing.Point(286, 7);
+            this.map.Name = "map";
+            this.map.Size = new System.Drawing.Size(480, 380);
+            this.map.TabIndex = 23;
+            this.map.TabStop = false;
+            // 
+            // book
+            // 
+            this.book.Location = new System.Drawing.Point(93, 353);
+            this.book.Name = "book";
+            this.book.Size = new System.Drawing.Size(75, 23);
+            this.book.TabIndex = 1;
+            this.book.Text = "Book Rute";
+            this.book.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.map);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label6);
@@ -278,27 +295,27 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.toZipCode);
+            this.Controls.Add(this.toSide);
+            this.Controls.Add(this.toFloor);
+            this.Controls.Add(this.toStreetNo);
+            this.Controls.Add(this.toStreet);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.fromZipCode);
+            this.Controls.Add(this.fromSide);
+            this.Controls.Add(this.fromFloor);
+            this.Controls.Add(this.fromStreetNo);
+            this.Controls.Add(this.fromStreet);
             this.Controls.Add(this.groupBox1);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.map)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -306,11 +323,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox fromStreet;
+        private System.Windows.Forms.TextBox fromStreetNo;
+        private System.Windows.Forms.TextBox fromFloor;
+        private System.Windows.Forms.TextBox fromSide;
+        private System.Windows.Forms.TextBox fromZipCode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -321,16 +338,17 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox toZipCode;
+        private System.Windows.Forms.TextBox toSide;
+        private System.Windows.Forms.TextBox toFloor;
+        private System.Windows.Forms.TextBox toStreetNo;
+        private System.Windows.Forms.TextBox toStreet;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox map;
+        private System.Windows.Forms.Button book;
 
     }
 }

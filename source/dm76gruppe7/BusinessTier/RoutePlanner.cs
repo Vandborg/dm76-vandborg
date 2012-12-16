@@ -7,41 +7,20 @@ using System.Diagnostics;
 using DBLayer;
 using System.Net;
 using System.Json;
+using System.Timers;
 
 namespace BusinessTier
 {
     public class RoutePlanner : IRouteplanner
     {
         Graph graph;
+        Timer reserveTimer;
+        List<Battery> reservedBatteries = new List<Battery>();
+        IDBBattery dbBattery = new DBBattery();
 
         public RoutePlanner()
         {
-            graph = new Graph();
-            IDBNode dbNodes = new DBNode();
-            IDBNeighbors dbNeighbors = new DBNeighbors();
-
-            List<Node> Nodes = dbNodes.getAllNodes();
-            Debug.WriteLine("First Count: "+Nodes.Count.ToString());
-
-            foreach(Node node in Nodes)
-            {
-                graph.AddNode(node);
-            }
-
-            foreach (Node node in graph.Nodes)
-            {
-                List<List<int>> Neighbors = dbNeighbors.getAllNeighbors(node);
-                foreach (int i in Neighbors.ElementAt(0))
-                {
-                   int count = 0;
-                   foreach(Node Neighbor in graph.Nodes)
-                   if(Neighbor.Id==i)
-                   {
-                       graph.AddDirectedEdge(node, Neighbor,Neighbors.ElementAt(1).ElementAt(count));
-                   }
-                   count++;
-                }
-            }
+            graph = CreateGraph();
 
             /*Node node1 = new Node(new Station("Løkkegade","21, 3. th.",9000));
             Node node2 = new Node(new Station("Løkkegade", "22, 3. th.", 9000));
@@ -68,6 +47,61 @@ namespace BusinessTier
 
         }
 
+        private Graph CreateGraph()
+        {
+            Graph finalgraph = new Graph();
+            IDBNode dbNodes = new DBNode();
+            IDBNeighbors dbNeighbors = new DBNeighbors();
+            IDBBattery dbBattery = new DBBattery();
+
+            List<Node> Nodes = dbNodes.getAllNodes();
+            List<Battery> Batteries = dbBattery.getAllBatteries();
+
+            foreach (Node node in Nodes)
+            {
+                foreach (Battery battery in Batteries)
+                {
+                    if (battery._station != null)
+                    {
+                        if (node.Data._id == battery._station._id)
+                        {
+                            node.Data.AddBattery(battery);
+                        }
+                    }
+                }
+
+                Battery batteryCharged = node.Data.Batteries.Find(
+                        delegate(Battery bttr)
+                        {
+                            return bttr._status == Battery.Status.Charged;
+                        }
+                        );
+
+                if (batteryCharged != null)
+                {
+                    finalgraph.AddNode(node);
+                }
+            }
+
+            Debug.WriteLine("count: "+finalgraph.Nodes.Count().ToString());
+
+            foreach (Node node in finalgraph.Nodes)
+            {
+                List<List<int>> Neighbors = dbNeighbors.getAllNeighbors(node);
+                foreach (int i in Neighbors.ElementAt(0))
+                {
+                    int count = 0;
+                    foreach (Node Neighbor in finalgraph.Nodes)
+                        if (Neighbor.Id == i)
+                        {
+                            finalgraph.AddDirectedEdge(node, Neighbor, Neighbors.ElementAt(1).ElementAt(count));
+                        }
+                    count++;
+                }
+            }
+            return finalgraph;
+        }
+
         public List<Node> ShortestRoute(string start, string end)
         {
             List<Node> result = new List<Node>();
@@ -81,19 +115,31 @@ namespace BusinessTier
                 Graph tempGraph = graph.DeepClone();
                 tempGraph = GoogleMapsAddEdges(tempGraph, startNode, endNode);
 
-                Debug.WriteLine("--------------------------------------------------------");
-                Debug.WriteLine("ElementAt(0): "+tempGraph.Nodes.ElementAt(0).Data._street);
-                Debug.WriteLine("ElementAt(5): " + tempGraph.Nodes.ElementAt(5).Data._street);
-                Debug.WriteLine("--------------------------------------------------------");
-
                 result = tempGraph.ShortestPath(startNode, endNode);
-                //result = tempGraph.ShortestPath(tempGraph.Nodes.ElementAt(0), tempGraph.Nodes.ElementAt(5));
+
+                //Reservering the batteries
+                foreach (Node node in result)
+                {
+                    if (node.Id != -1)
+                    {
+                        Battery battery = node.Data.Batteries.First();
+                        battery._status = Battery.Status.Reserved;
+                        reservedBatteries.Add(battery);
+                        Debug.WriteLine("Succes: "+dbBattery.updateBattery(battery).ToString());
+                    }
+                }
+
+                reserveTimer = new System.Timers.Timer(1000 * 60 * 15);
+                reserveTimer.Elapsed += new ElapsedEventHandler(unreserveBatteries);
+                reserveTimer.Start();
             }
             catch(Exception e)
             {
                 Debug.WriteLine(e.Message);
             }
-            
+
+            Debug.WriteLine("result count: "+result.Count.ToString());
+
             return result;
         }
 
@@ -120,16 +166,10 @@ namespace BusinessTier
                 destination += node.Data._street + "+" + node.Data._streetNo + "+" + node.Data._zipCode + "+danmark|";
             }
 
-            Debug.WriteLine("Count: "+inputGraph.Nodes.Count.ToString());
             destination = destination.Substring(0, destination.Length - 1);
 
-            Debug.WriteLine("Origins: "+origins);
-            Debug.WriteLine("Destination: "+destination);
-
-            //string DownloadString = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origins + "&destinations=" + destination + "&mode=driving&language=da&sensor=false";
-            string DownloadString = "E:/Windows/Documents/DM76-gruppe7/testjson.json";
-            
-            Debug.WriteLine("DownloadString: "+DownloadString);
+            string DownloadString = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origins + "&destinations=" + destination + "&mode=driving&language=da&sensor=false";
+            //string DownloadString = "E:/Windows/Documents/DM76-gruppe7/testjson.json";
 
             WebClient webclient = new WebClient();
 
@@ -162,15 +202,22 @@ namespace BusinessTier
             inputGraph.AddNode(startNode);
             inputGraph.AddNode(endNode);
 
-            foreach(Node node in inputGraph.Nodes)
-            {
-                Debug.WriteLine("Street: "+node.Data._street);
-                Debug.WriteLine("StreetNo: " + node.Data._streetNo);
-                Debug.WriteLine("ZipCode: " + node.Data._zipCode.ToString());
-            }
-            Debug.WriteLine("NeighborCount: "+inputGraph.Nodes.Last().Neighbors.Count().ToString());
-
             return inputGraph;
+        }
+
+        private void unreserveBatteries(object source, ElapsedEventArgs e)
+        {
+            reserveTimer.Stop();
+            reserveTimer.Dispose();
+
+            foreach(Battery battery in reservedBatteries)
+            {
+                if(battery._status != Battery.Status.Booked)
+                {
+                    battery._status = Battery.Status.Charged;
+                    dbBattery.updateBattery(battery);
+                }
+            }
         }
     }
 }

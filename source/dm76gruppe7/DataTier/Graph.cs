@@ -80,9 +80,6 @@ namespace DataTier
             List<Node> shortestRoute = new List<Node>();
             
             foreach(Node x in queue){
-                //Debug.Write(x.Data._streetNo + " => ");
-                foreach (var y in x.Neighbors)
-                    //Debug.Print(y.Data._streetNo + " (" + x.Costs[x.Neighbors.IndexOf(y)] + ")");
                 x.Label = int.MaxValue;
                 x.InQueue = true;
             }
@@ -111,18 +108,14 @@ namespace DataTier
 
                 if (nextNode == endNode)
                 {
-                    int totalcost = 0;
                     var tmp = nextNode;
                     shortestRoute.Add(nextNode);
                     while (tmp.Previous != null)
                     {
-                        Debug.WriteLine("Costs: "+tmp.Costs.ElementAt(tmp.Neighbors.IndexOf(tmp.Previous)));
-                        totalcost += tmp.Costs.ElementAt(tmp.Neighbors.IndexOf(tmp.Previous));
                         shortestRoute.Add(tmp.Previous);
                         tmp = tmp.Previous;
                     }
                     shortestRoute.Reverse();
-                    Debug.WriteLine("Total Costs: "+totalcost.ToString());
                     break;
                 }
 
@@ -140,7 +133,6 @@ namespace DataTier
                     }
                 }
             }
-            Console.WriteLine("Teest");
             return shortestRoute;
         }
 
