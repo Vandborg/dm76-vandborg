@@ -52,9 +52,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.book = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.map = new System.Windows.Forms.PictureBox();
-            this.book = new System.Windows.Forms.Button();
+            this.hostbox = new System.Windows.Forms.TextBox();
+            this.host = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.map)).BeginInit();
             this.SuspendLayout();
@@ -250,6 +252,15 @@
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             // 
+            // book
+            // 
+            this.book.Location = new System.Drawing.Point(93, 353);
+            this.book.Name = "book";
+            this.book.Size = new System.Drawing.Size(75, 23);
+            this.book.TabIndex = 1;
+            this.book.Text = "Book Rute";
+            this.book.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(174, 353);
@@ -273,20 +284,30 @@
             this.map.TabIndex = 23;
             this.map.TabStop = false;
             // 
-            // book
+            // hostbox
             // 
-            this.book.Location = new System.Drawing.Point(93, 353);
-            this.book.Name = "book";
-            this.book.Size = new System.Drawing.Size(75, 23);
-            this.book.TabIndex = 1;
-            this.book.Text = "Book Rute";
-            this.book.UseVisualStyleBackColor = true;
+            this.hostbox.Location = new System.Drawing.Point(550, 477);
+            this.hostbox.Name = "hostbox";
+            this.hostbox.Size = new System.Drawing.Size(216, 20);
+            this.hostbox.TabIndex = 24;
+            this.hostbox.Text = "http://localhost:3108";
+            // 
+            // host
+            // 
+            this.host.AutoSize = true;
+            this.host.Location = new System.Drawing.Point(547, 461);
+            this.host.Name = "host";
+            this.host.Size = new System.Drawing.Size(32, 13);
+            this.host.TabIndex = 25;
+            this.host.Text = "Host:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.host);
+            this.Controls.Add(this.hostbox);
             this.Controls.Add(this.map);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -349,6 +370,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox map;
         private System.Windows.Forms.Button book;
+        private System.Windows.Forms.TextBox hostbox;
+        private System.Windows.Forms.Label host;
 
     }
 }

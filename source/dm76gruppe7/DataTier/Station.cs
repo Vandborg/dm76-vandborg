@@ -13,7 +13,7 @@ namespace DataTier
     {
         [DataMember]
         public override int _id { get; set; }
-        
+        [DataMember]
         List<Battery> _batteries = new List<Battery>();
 
         public Station()

@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace DataTier
 {
+    [KnownType(typeof(Battery))]
     [DataContract(IsReference = true)]
     [Serializable]
     public class Location

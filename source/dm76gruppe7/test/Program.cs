@@ -74,12 +74,12 @@ namespace test
             }*/
             
             IDBBattery dbbattery = new DBBattery();
-            List<Battery> battery = dbbattery.getAllBatteries();
+            /*List<Battery> battery = dbbattery.getAllBatteries();
 
             battery.First()._status = Battery.Status.Booked;
-            dbbattery.updateBattery(battery.First());
-            /*Battery battery = new Battery(Battery.Status.Charged,new Station(1,"TRAFIKCENTER SÆBY SYD","20",9300));
-            IDBStation dbstation = new DBStation();
+            dbbattery.updateBattery(battery.First());*/
+            Battery battery = new Battery(Battery.Status.Charged,new Station(1,"TRAFIKCENTER SÆBY SYD","20",9300));
+            /*IDBStation dbstation = new DBStation();
             List<Station> stations = dbstation.getAllStations();
 
             foreach (Station station in stations)
@@ -127,7 +127,7 @@ namespace test
                 }
             }*/
 
-            /*IDBCar dbcar = new DBCar();
+            IDBCar dbcar = new DBCar();
             Car car = new Car("dd12319",150,new Customer(1,"Jesper Vandborg","jesper@vandborg.net"));
 
             if (dbcar.createCar(car))
@@ -168,7 +168,7 @@ namespace test
                         Console.WriteLine("----------------------------------------");
                     }
                 }
-            }*/
+            }
 
             /*IDBCustomer dbCustomer = new DBCustomer();
             Customer Customer = new Customer("Charlotte Bust Sigvardt", "charlottebust@gmail.com");

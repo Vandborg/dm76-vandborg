@@ -12,53 +12,40 @@ using System.Diagnostics;
 
 namespace WcfBetterplaceRest
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     public class RemoteRoutePlanner : IRemoteRoutePlanner
     {
         
         public string shortestRoute(string start,string end)
         {
             IRouteplanner rp = new RoutePlanner();
-            List<string> resultAddresses = new List<string>();
-            List<Location> test = new List<Location>();
-            List<Node> result = rp.ShortestRoute(start, end);
+            List<Location> resultList = new List<Location>();
+
+            string[] startAddress = AddressParser(start);
+            string[] endAddress = AddressParser(end);
+            Node startNode = new Node(new Location(startAddress[0], startAddress[1], Convert.ToInt32(startAddress[2])));
+            Node endNode = new Node(new Location(endAddress[0], endAddress[1], Convert.ToInt32(endAddress[2])));
+
+            List<Node> result = rp.ShortestRoute(startNode, endNode);
             foreach(Node n in result)
             {
-                /*string address = n.Data._street + "," + n.Data._streetNo+"," + n.Data._zipCode;
-                resultAddresses.Add(address);*/
-                test.Add(n.Data);
+                resultList.Add(n.Data);
             }
             Debug.WriteLine("remote result count: "+result.Count.ToString());
             var jsonSerialiser = new JavaScriptSerializer();
-            var json = jsonSerialiser.Serialize(resultAddresses);
-            var json2 = jsonSerialiser.Serialize(test);
-            Debug.WriteLine(json2);
+            var json = jsonSerialiser.Serialize(resultList);
 
-            return json2;
+            return json;
         }
 
-        /*public string shortestRoute(string test)
+        private string[] AddressParser(string s)
         {
+            //Format - Løkkegade-27_3_th-9000/Løkkegade-28_3_th-9000
 
+            string[] split = s.Split(new Char[] { '-' });
 
-            Node startNode = new Node(new Location("Løkkegade", "27, 3. th.", 9000));
-            Node endNode = new Node(new Location("Løkkegade", "28, 3. th.", 9000));
+            split[1] = split[1].Replace("_", " ");
 
-            List<Node> result = new List<Node>();
-            Graph graph = rp.getGraph().DeepClone();
-            graph.AddNode(startNode);
-            graph.AddNode(endNode);
-            graph.AddUndirectedEdge(startNode, graph.Nodes.ElementAt(0), 10);
-            graph.AddUndirectedEdge(endNode, graph.Nodes.ElementAt(5), 5);
-
-            result = graph.ShortestPath(startNode, endNode);
-            /*Node[] test = new Node[result.Count];
-            for (int i = 0; i < result.Count; i++)
-            {
-                test[i] = result[i];
-            }
-
-            return "test: "+test;
-        }*/
+            return split;
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace Client
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string BingAPIKey = "AmIg7-bIkZHBKjzOkUbceNBzNeyXEus9-sJhyh0_7kczHKUoQTSaa-z7c9vSEM2f";
+            string BingAPIKey = "AuJxqipZxkVPL55LRDisz6-9rknaWXsm0EJYBg33k8ZNZ9yrscjHvK310c4I4FKL";
             WebClient webclient = new WebClient();
             webclient.Encoding = System.Text.Encoding.UTF8;
 
@@ -66,7 +66,10 @@ namespace Client
                 toLocation += "-" + toZipCode.Text;
                 try
                 {
-                    string DownloadedString = webclient.DownloadString("http://localhost:3108/RemoteRoutePlanner.svc/shortestRoute/" + fromLocation + "/" + toLocation);
+                    string Host = hostbox.Text.ToString();
+                    Debug.WriteLine(Host);
+                    Debug.WriteLine(hostbox.Text.ToString());
+                    string DownloadedString = webclient.DownloadString(Host+"/RemoteRoutePlanner.svc/shortestRoute/" + fromLocation + "/" + toLocation);
 
                     //Done because WCF is adding escape chars. It is a default behavior and is apparently mandatory. And therefore it's not valid JSON.
                     DownloadedString = DownloadedString.Replace("\\", "");

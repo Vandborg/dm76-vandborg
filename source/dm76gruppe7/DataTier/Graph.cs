@@ -74,41 +74,58 @@ namespace DataTier
         }
 
         public List<Node> ShortestPath(Node startNode, Node endNode)
-        {
-            List<Node> queue = _nodeSet;
-            Node nextNode = null;
-            List<Node> shortestRoute = new List<Node>();
-            
-            foreach(Node x in queue){
-                x.Label = int.MaxValue;
-                x.InQueue = true;
-            }
-            startNode.Label = 0;
+        {												    // Initializations
 
-            while (queue.Count > 0)
+            List<Node> queue = _nodeSet;                    // The set of all nodes in
+                                                            // Graph
+
+            Node nextNode = null;						    // Previous node in optimal
+                                                            // path from startNode
+
+            List<Node> shortestRoute = new List<Node>();    // This will hold the set
+                                                            // of nodes which is the
+                                                            // shortestPath.
+            foreach (Node x in queue)
             {
-                int smallestDistance = int.MaxValue;
+                x.Label = int.MaxValue;					    // Unknown distance from
+                                                            // startNode to endNode
+                                                            // (infinity)
 
-                foreach (Node j in queue) // only the previous nodes have a label
-                {
-                    if (j.Label < smallestDistance)
-                    {
-                        smallestDistance = j.Label;
-                        nextNode = j;
-                    }
+                x.InQueue = true;						    // "Cheat" queue for
+                                                            // optimatiztion.
+            }
+            startNode.Label = 0;						    // Distance from startNode
+                                                            // to startNode.
+
+            while (queue.Count > 0)						    // The main loop
+            {
+                int smallestDistance = int.MaxValue;	    // This finds the vertex
+                foreach (Node j in queue)				    // with the smallest
+                {										    // distance.
+                    if (j.Label < smallestDistance) 	    // Start node in first case
+                    {									    //
+                        smallestDistance = j.Label;		    //	
+                        nextNode = j;					    //
+                    }									    //
+                }										    //
+
+                if (smallestDistance == int.MaxValue)	    // all remaining vertices
+                {										    // are inaccessible from
+                    break;								    // source
                 }
+                queue.Remove(nextNode);					    // removes the vertex with
+                                                            // smallest distance from
+                                                            // queue
 
-                if (smallestDistance == int.MaxValue)
-                {
-                    break;
-                }
+                nextNode.InQueue = false;				    // optimization - Don't
+                                                            // have to loop through the
+                                                            // List to findout
+                                                            // if the node still are in
+                                                            // the queue.
 
-                queue.Remove(nextNode);
-                nextNode.InQueue = false; // optimization
-
-                if (nextNode == endNode)
-                {
-                    var tmp = nextNode;
+                if (nextNode == endNode)				    // If next node is the
+                {										    // destination. Stop and
+                    var tmp = nextNode;					    // Create route.
                     shortestRoute.Add(nextNode);
                     while (tmp.Previous != null)
                     {
@@ -119,13 +136,13 @@ namespace DataTier
                     break;
                 }
 
-                for(int i = 0; i < nextNode.Neighbors.Count; i++)
-                {
-                    var Neighbour = nextNode.Neighbors[i];
-                    if (Neighbour.InQueue)
+                for (int i = 0; i < nextNode.Neighbors.Count; i++)  //For every
+                {												    //neighbor
+                    var Neighbour = nextNode.Neighbors[i];		    //Which stil
+                    if (Neighbour.InQueue)						    //are in queue
                     {
                         int distance = nextNode.Label + nextNode.Costs[i];
-                        if (distance < Neighbour.Label)
+                        if (distance < Neighbour.Label) 		    //Relaxing
                         {
                             Neighbour.Label = distance;
                             Neighbour.Previous = nextNode;
@@ -133,7 +150,7 @@ namespace DataTier
                     }
                 }
             }
-            return shortestRoute;
+            return shortestRoute;			                        //Return of the shortestRoute
         }
 
         [DataMember]
@@ -156,14 +173,5 @@ namespace DataTier
                 return (Graph)formatter.Deserialize(ms);
             }
         }
-
-        /*[DataMember]
-        public int Count
-        {
-            get
-            {
-                return _nodeSet.Count;
-            }
-        }*/
     }
 }

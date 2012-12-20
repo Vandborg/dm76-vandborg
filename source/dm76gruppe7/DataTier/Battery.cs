@@ -8,6 +8,7 @@ namespace DataTier
 {
     [KnownType(typeof(PartRoute))]
     [KnownType(typeof(Station))]
+    [KnownType(typeof(Location))]
     [KnownType(typeof(Car))]
     [DataContract(IsReference= true)]
     [Serializable]
